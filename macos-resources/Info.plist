@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleExecutable</key>
+    <string>Shimeji-ee</string>
+    <key>CFBundleIconFile</key>
+    <string>Shimeji-ee.icns</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.group_finity.mascot</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>Shimeji-ee</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>2.0.0</string>
+    <key>CFBundleVersion</key>
+    <string>2.0.0</string>
+    <key>NSHumanReadableCopyright</key>
+    <string>Copyright (C) 2025 Shimeji-ee Group</string>
+    <key>NSHighResolutionCapable</key>
+    <true/>
+    
+    <!-- 屏幕录制权限 - macOS 10.15+ -->
+    <key>NSScreenCaptureUsageDescription</key>
+    <string>Shimeji-ee needs screen recording permission to display desktop mascots that interact with your screen.</string>
+    
+    <!-- 可访问性权限 -->
+    <key>NSAccessibilityUsageDescription</key>
+    <string>Shimeji-ee needs accessibility access to interact with the desktop and display mascots.</string>
+    
+    <!-- 系统扩展 -->
+    <key>NSSystemExtensionUsageDescription</key>
+    <string>Shimeji-ee needs system extension access to display desktop mascots.</string>
+    
+    <!-- 相机权限 -->
+    <key>NSCameraUsageDescription</key>
+    <string>Shimeji-ee may need camera access for advanced interaction features.</string>
+
+    <!-- 麦克风权限 -->
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Shimeji-ee may need microphone access for voice interaction features.</string>
+
+    <!-- 桌面文件夹权限 (macOS Ventura+) -->
+    <key>NSDesktopFolderUsageDescription</key>
+    <string>Shimeji-ee needs access to place mascot files on desktop.</string>
+    
+    <!-- 允许应用在后台运行 -->
+    <key>LSUIElement</key>
+    <false/>
+    
+    <!-- 应用类别 -->
+    <key>LSApplicationCategoryType</key>
+    <string>public.app-category.entertainment</string>
+    
+    <!-- 文档类型 -->
+    <key>CFBundleDocumentTypes</key>
+    <array/>
+    
+    <!-- URL schemes -->
+    <key>CFBundleURLTypes</key>
+    <array/>
+    
+    <!-- 最低系统版本 -->
+    <key>LSMinimumSystemVersion</key>
+    <string>10.15</string>
+    
+    <!-- 支持暗色模式 -->
+    <key>NSSupportsAutomaticGraphicsSwitching</key>
+    <true/>
+    
+    <!-- Java 特定配置 -->
+    <key>JVMMainClassName</key>
+    <string>com.group_finity.mascot.Main</string>
+    
+    <!-- 禁用应用传输安全 (如果需要网络访问) -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <false/>
+    </dict>
+</dict>
+</plist>

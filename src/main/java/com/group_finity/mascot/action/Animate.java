@@ -1,0 +1,42 @@
+package com.group_finity.mascot.action;
+
+import java.util.List;
+
+import com.group_finity.mascot.animation.Animation;
+import com.group_finity.mascot.exception.LostGroundException;
+import com.group_finity.mascot.exception.VariableException;
+import com.group_finity.mascot.script.VariableMap;
+
+/**
+ * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
+ * Currently developed by Shimeji-ee Group.
+ */
+public class Animate extends BorderedAction {
+
+	public Animate( java.util.ResourceBundle schema, final List<Animation> animations, final VariableMap context )
+        {
+            super( schema, animations, context );
+	}
+
+	@Override
+	protected void tick() throws LostGroundException, VariableException {
+
+		super.tick();
+
+		if ((getBorder() != null) && !getBorder().isOn(getMascot().getAnchor())) {
+			throw new LostGroundException();
+		}
+
+		getAnimation().next(getMascot(), getTime());
+
+	}
+
+	@Override
+	public boolean hasNext() throws VariableException {
+
+		final boolean intime = getTime() < getAnimation().getDuration();
+
+		return super.hasNext() && intime;
+	}
+
+}

@@ -1,0 +1,21 @@
+package com.group_finity.mascot.behavior;
+
+import java.awt.event.MouseEvent;
+
+import com.group_finity.mascot.Mascot;
+import com.group_finity.mascot.exception.CantBeAliveException;
+
+/**
+ * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
+ * Currently developed by Shimeji-ee Group.
+ */
+public interface Behavior
+{
+    void init(Mascot mascot) throws CantBeAliveException;
+
+    void next() throws CantBeAliveException;
+
+    void mousePressed(MouseEvent e) throws CantBeAliveException;
+
+    void mouseReleased(MouseEvent e) throws CantBeAliveException;
+}
