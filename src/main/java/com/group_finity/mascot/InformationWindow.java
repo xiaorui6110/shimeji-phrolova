@@ -81,12 +81,15 @@ public class InformationWindow extends javax.swing.JFrame
         setTitle( config.containsInformationKey( "Name" ) ? config.getInformation( "Name" ) : language.getString( "Information" ) );
         
         StringBuilder html = new StringBuilder( "<center style=\"font:" );
-        if( lblSplashImage.getFont( ).getStyle( ) == Font.BOLD )
+        if( lblSplashImage.getFont( ).getStyle( ) == Font.BOLD ) {
             html.append( "bold " );
-        if( lblSplashImage.getFont( ).getStyle( ) == Font.ITALIC )
+        }
+        if( lblSplashImage.getFont( ).getStyle( ) == Font.ITALIC ) {
             html.append( "italic " );
-        if( lblSplashImage.getFont( ).getStyle( ) == Font.BOLD + Font.ITALIC )
+        }
+        if( lblSplashImage.getFont( ).getStyle( ) == Font.BOLD + Font.ITALIC ) {
             html.append( "italic bold " );
+        }
         html.append( lblSplashImage.getFont( ).getSize( ) );
         html.append( "pt " );
         html.append( lblSplashImage.getFont( ).getFontName( ) );
@@ -106,13 +109,15 @@ public class InformationWindow extends javax.swing.JFrame
                 html.append( "\">" );
             }
             html.append( config.getInformation( "ArtistName" ) );
-            if( config.containsInformationKey( "ArtistURL" ) )
+            if( config.containsInformationKey( "ArtistURL" ) ) {
                 html.append( "</a>" );
+            }
         }
         if( config.containsInformationKey( "ScripterName" ) )
         {
-            if( config.containsInformationKey( "ArtistName" ) )
+            if( config.containsInformationKey( "ArtistName" ) ) {
                 html.append( " - " );
+            }
             html.append( language.getString( "ScriptedBy" ) );
             html.append( " " );
             if( config.containsInformationKey( "ScripterURL" ) )
@@ -124,13 +129,15 @@ public class InformationWindow extends javax.swing.JFrame
                 html.append( "\">" );
             }
             html.append( config.getInformation( "ScripterName" ) );
-            if( config.containsInformationKey( "ScripterURL" ) )
+            if( config.containsInformationKey( "ScripterURL" ) ) {
                 html.append( "</a>" );
+            }
         }
         if( config.containsInformationKey( "CommissionerName" ) )
         {
-            if( config.containsInformationKey( "ArtistName" ) || config.containsInformationKey( "ScripterName" ) )
+            if( config.containsInformationKey( "ArtistName" ) || config.containsInformationKey( "ScripterName" ) ) {
                 html.append( " - " );
+            }
             html.append( language.getString( "CommissionedBy" ) );
             html.append( " " );
             if( config.containsInformationKey( "CommissionerURL" ) )
@@ -142,13 +149,15 @@ public class InformationWindow extends javax.swing.JFrame
                 html.append( "\">" );
             }
             html.append( config.getInformation( "CommissionerName" ) );
-            if( config.containsInformationKey( "CommissionerURL" ) )
+            if( config.containsInformationKey( "CommissionerURL" ) ) {
                 html.append( "</a>" );
+            }
         }
         if( config.containsInformationKey( "SupportName" ) )
         {
-            if( config.containsInformationKey( "ArtistName" ) || config.containsInformationKey( "ScripterName" ) || config.containsInformationKey( "CommissionerName" ) )
+            if( config.containsInformationKey( "ArtistName" ) || config.containsInformationKey( "ScripterName" ) || config.containsInformationKey( "CommissionerName" ) ) {
                 html.append( " - " );
+            }
             html.append( language.getString( "SupportAt" ) );
             html.append( " " );
             if( config.containsInformationKey( "SupportURL" ) )
@@ -160,8 +169,9 @@ public class InformationWindow extends javax.swing.JFrame
                 html.append( "\">" );
             }
             html.append( config.getInformation( "SupportName" ) );
-            if( config.containsInformationKey( "SupportURL" ) )
+            if( config.containsInformationKey( "SupportURL" ) ) {
                 html.append( "</a>" );
+            }
         }
         html.append( "</center>" );
         
@@ -182,10 +192,11 @@ public class InformationWindow extends javax.swing.JFrame
                         try
                         {
                             Desktop desktop = Desktop.isDesktopSupported( ) ? Desktop.getDesktop( ) : null;
-                            if( desktop != null && desktop.isSupported( Desktop.Action.BROWSE ) )
+                            if( desktop != null && desktop.isSupported( Desktop.Action.BROWSE ) ) {
                                 desktop.browse( new URI( url ) );
-                            else
+                            } else {
                                 throw new UnsupportedOperationException( Main.getInstance( ).getLanguageBundle( ).getString( "FailedOpenWebBrowserErrorMessage" ) + " " + url );
+                            }
                         }
                         catch( Exception exc )
                         {

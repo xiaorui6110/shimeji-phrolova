@@ -18,8 +18,9 @@ public class Sounds
 
     public static void load( final String filename, final Clip clip )
     {
-        if( !SOUNDS.containsKey( filename ) )
+        if( !SOUNDS.containsKey( filename ) ) {
             SOUNDS.put( filename, clip );
+        }
     }
 
     public static boolean contains( String filename )
@@ -29,8 +30,9 @@ public class Sounds
 
     public static Clip getSound( String filename )
     {
-        if( !SOUNDS.containsKey( filename ) )
+        if( !SOUNDS.containsKey( filename ) ) {
             return null;
+        }
         return SOUNDS.get( filename );
     }
 

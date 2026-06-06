@@ -29,7 +29,7 @@ public abstract class ActionBase implements Action
     public static final String PARAMETER_DRAGGABLE = "Draggable";
 
     private static final boolean DEFAULT_DRAGGABLE = true;
-    
+
     public static final String PARAMETER_AFFORDANCE = "Affordance";
 
     private static final String DEFAULT_AFFORDANCE = "";
@@ -85,16 +85,18 @@ public abstract class ActionBase implements Action
     public void next( ) throws LostGroundException, VariableException
     {
         initFrame( );
-        
+
         // affordances
-        if( !getMascot( ).getAffordances( ).isEmpty( ) )
+        if( !getMascot( ).getAffordances( ).isEmpty( ) ) {
             getMascot( ).getAffordances( ).clear( );
-        if( !getAffordance( ).trim( ).isEmpty( ) )
+        }
+        if( !getAffordance( ).trim( ).isEmpty( ) ) {
             getMascot( ).getAffordances( ).add( getAffordance( ) );
-        
+        }
+
         // hotspots
         refreshHotspots( );
-        
+
         tick( );
     }
 
@@ -131,8 +133,9 @@ public abstract class ActionBase implements Action
         {
             if( getAnimation( ) != null )
             {
-                for( final Hotspot hotspot : getAnimation( ).getHotspots( ) )
+                for( final Hotspot hotspot : getAnimation( ).getHotspots( ) ) {
                     getMascot( ).getHotspots( ).add( hotspot );
+                }
             }
         }
         catch( VariableException ex )
@@ -140,7 +143,7 @@ public abstract class ActionBase implements Action
             getMascot( ).getHotspots( ).clear( );
         }
     }
-        
+
     public Boolean isDraggable( ) throws VariableException
     {
         return eval( schema.getString( PARAMETER_DRAGGABLE ), Boolean.class, DEFAULT_DRAGGABLE );

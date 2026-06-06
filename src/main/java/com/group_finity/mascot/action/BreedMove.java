@@ -33,7 +33,8 @@ public class BreedMove extends Move
     {
         super.tick( );
         
-        if( delegate.isIntervalFrame( ) && !isTurning( ) && delegate.isEnabled( ) )
+        if( delegate.isIntervalFrame( ) && !isTurning( ) && delegate.isEnabled( ) ) {
             delegate.breed( );
+        }
     }
 }

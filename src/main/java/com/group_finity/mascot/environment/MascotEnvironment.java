@@ -53,7 +53,9 @@ public class MascotEnvironment
                     return currentWorkArea;
                 }
             }
-            else return currentWorkArea;
+            else {
+                return currentWorkArea;
+            }
         }
 
         if( impl.getWorkArea( ).contains( mascot.getAnchor( ).x, mascot.getAnchor( ).y ) )
@@ -79,8 +81,9 @@ public class MascotEnvironment
     {
         Area activeIE = impl.getActiveIE( );
         
-        if( currentWorkArea != null && !Boolean.parseBoolean( Main.getInstance( ).getProperties( ).getProperty( "Multiscreen", "true" ) ) && !currentWorkArea.toRectangle( ).intersects( activeIE.toRectangle( ) ) )
+        if( currentWorkArea != null && !Boolean.parseBoolean( Main.getInstance( ).getProperties( ).getProperty( "Multiscreen", "true" ) ) && !currentWorkArea.toRectangle( ).intersects( activeIE.toRectangle( ) ) ) {
             return new Area( );
+        }
         
         return activeIE;
     }

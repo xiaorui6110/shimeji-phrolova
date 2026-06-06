@@ -30,8 +30,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.LookAndFeel;
 import com.formdev.flatlaf.FlatLaf;
-import com.group_finity.mascot.license.LicenseManager;
-import com.group_finity.mascot.license.LicenseLevel;
 
 /**
  * @author Kilkakon
@@ -125,10 +123,11 @@ public class SettingsWindow extends javax.swing.JDialog {
                                 .parseBoolean(properties.getProperty("AlwaysShowInformationScreen", "false"));
                 String filterText = Main.getInstance().getProperties().getProperty("Filter", "false");
                 filter = "nearest";
-                if (filterText.equalsIgnoreCase("true") || filterText.equalsIgnoreCase("hqx"))
-                        filter = "hqx";
-                else if (filterText.equalsIgnoreCase("bicubic"))
-                        filter = "bicubic";
+                if (filterText.equalsIgnoreCase("true") || filterText.equalsIgnoreCase("hqx")) {
+                    filter = "hqx";
+                } else if (filterText.equalsIgnoreCase("bicubic")) {
+                    filter = "bicubic";
+                }
                 opacity = Double.parseDouble(properties.getProperty("Opacity", "1.0"));
                 scaling = Double.parseDouble(properties.getProperty("Scaling", "1.0"));
                 windowedMode = properties.getProperty("Environment", "generic").equals("virtual");
@@ -142,12 +141,13 @@ public class SettingsWindow extends javax.swing.JDialog {
                 float menuScaling = Float.parseFloat(properties.getProperty("MenuDPI", "96")) / 96;
                 chkAlwaysShowShimejiChooser.setSelected(alwaysShowShimejiChooser);
                 chkAlwaysShowInformationScreen.setSelected(alwaysShowInformationScreen);
-                if (filter.equals("bicubic"))
-                        radFilterBicubic.setSelected(true);
-                else if (filter.equals("hqx"))
-                        radFilterHqx.setSelected(true);
-                else
-                        radFilterNearest.setSelected(true);
+                if (filter.equals("bicubic")) {
+                    radFilterBicubic.setSelected(true);
+                } else if (filter.equals("hqx")) {
+                    radFilterHqx.setSelected(true);
+                } else {
+                    radFilterNearest.setSelected(true);
+                }
                 sldOpacity.setValue((int) (opacity * 100));
                 sldScaling.setValue((int) (scaling * 10));
                 spnScaling.setValue(scaling);
@@ -521,10 +521,11 @@ public class SettingsWindow extends javax.swing.JDialog {
                 lblIcon.setPreferredSize(new Dimension((int) (lblIcon.getPreferredSize().width * menuScaling),
                                 (int) (lblIcon.getPreferredSize().height * menuScaling)));
                 lblIcon.setMaximumSize(lblIcon.getPreferredSize());
-                if (!getIconImages().isEmpty())
-                        lblIcon.setIcon(new ImageIcon(getIconImages().getFirst().getScaledInstance(
-                                        lblIcon.getPreferredSize().width,
-                                        lblIcon.getPreferredSize().height, java.awt.Image.SCALE_DEFAULT)));
+                if (!getIconImages().isEmpty()) {
+                    lblIcon.setIcon(new ImageIcon(getIconImages().getFirst().getScaledInstance(
+                                    lblIcon.getPreferredSize().width,
+                                    lblIcon.getPreferredSize().height, Image.SCALE_DEFAULT)));
+                }
                 btnWebsite.setPreferredSize(new Dimension((int) (btnWebsite.getPreferredSize().width * menuScaling),
                                 (int) (btnWebsite.getPreferredSize().height * menuScaling)));
                 btnDiscord.setPreferredSize(new Dimension((int) (btnDiscord.getPreferredSize().width * menuScaling),
@@ -581,13 +582,14 @@ public class SettingsWindow extends javax.swing.JDialog {
         private void browseToUrl(String url) {
                 try {
                         Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-                        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE))
-                                desktop.browse(new URI(url));
-                        else
-                                throw new UnsupportedOperationException(
-                                                Main.getInstance().getLanguageBundle()
-                                                                .getString("FailedOpenWebBrowserErrorMessage") + " "
-                                                                + url);
+                        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+                            desktop.browse(new URI(url));
+                        } else {
+                            throw new UnsupportedOperationException(
+                                            Main.getInstance().getLanguageBundle()
+                                                            .getString("FailedOpenWebBrowserErrorMessage") + " "
+                                                            + url);
+                        }
                 } catch (Exception e) {
                         JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE);
                 }
@@ -599,8 +601,9 @@ public class SettingsWindow extends javax.swing.JDialog {
 
                 String selectedName = (String) JOptionPane.showInputDialog(parent,
                                 "选择字体:", "字体选择", JOptionPane.QUESTION_MESSAGE, null, fontNames, currentFont.getName());
-                if (selectedName == null)
-                        return null;
+                if (selectedName == null) {
+                    return null;
+                }
 
                 int style = Font.PLAIN;
 
@@ -2219,14 +2222,16 @@ public class SettingsWindow extends javax.swing.JDialog {
                 alwaysShowShimejiChooser = evt.getStateChange() == ItemEvent.SELECTED;
         }// GEN-LAST:event_chkAlwaysShowShimejiChooserItemStateChanged
 
+        // TODO delete license check
+
         private void radFilterItemStateChanged(java.awt.event.ItemEvent evt)// GEN-FIRST:event_radFilterItemStateChanged
         {// GEN-HEADEREND:event_radFilterItemStateChanged
                 if (evt.getStateChange() == ItemEvent.SELECTED) {
                         Object source = evt.getItemSelectable();
 
-                        if (source == radFilterNearest)
-                                filter = "nearest";
-                        else if (source == radFilterHqx) {
+                        if (source == radFilterNearest) {
+                            filter = "nearest";
+                        } else if (source == radFilterHqx) {
                                 // Check license for HQX filter
                                 LicenseManager licenseManager = LicenseManager.getInstance();
                                 LicenseLevel currentLevel = licenseManager.getCurrentLicenseLevel();
@@ -2247,8 +2252,9 @@ public class SettingsWindow extends javax.swing.JDialog {
                                         // Advanced or Special license - allow HQX
                                         filter = "hqx";
                                 }
-                        } else
-                                filter = "bicubic";
+                        } else {
+                            filter = "bicubic";
+                        }
                 }
         }// GEN-LAST:event_radFilterItemStateChanged
 
@@ -2276,9 +2282,9 @@ public class SettingsWindow extends javax.swing.JDialog {
                 
                 // 更新值并处理许可证检查
                 if (!sldScaling.getValueIsAdjusting()) {
-                        if (sldScaling.getValue() == 0)
-                                sldScaling.setValue(5);
-                        else {
+                        if (sldScaling.getValue() == 0) {
+                            sldScaling.setValue(5);
+                        } else {
                                 scaling = sldScaling.getValue() / 10.0;
                                 
                                 // 同步更新 Spinner 值
@@ -2387,10 +2393,11 @@ public class SettingsWindow extends javax.swing.JDialog {
         private void sldOpacityStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldOpacityStateChanged
         {// GEN-HEADEREND:event_sldOpacityStateChanged
                 if (!sldOpacity.getValueIsAdjusting()) {
-                        if (sldOpacity.getValue() == 0)
-                                sldOpacity.setValue(5);
-                        else
-                                opacity = sldOpacity.getValue() / 100.0;
+                        if (sldOpacity.getValue() == 0) {
+                            sldOpacity.setValue(5);
+                        } else {
+                            opacity = sldOpacity.getValue() / 100.0;
+                        }
                 }
         }// GEN-LAST:event_sldOpacityStateChanged
 
@@ -2450,8 +2457,9 @@ public class SettingsWindow extends javax.swing.JDialog {
 
         private void cmbBackgroundImageModeActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_cmbBackgroundImageModeActionPerformed
         {// GEN-HEADEREND:event_cmbBackgroundImageModeActionPerformed
-                if (cmbBackgroundImageMode.getSelectedIndex() > -1)
-                        backgroundMode = backgroundModes[cmbBackgroundImageMode.getSelectedIndex()];
+                if (cmbBackgroundImageMode.getSelectedIndex() > -1) {
+                    backgroundMode = backgroundModes[cmbBackgroundImageMode.getSelectedIndex()];
+                }
                 refreshBackgroundImage();
         }// GEN-LAST:event_cmbBackgroundImageModeActionPerformed
 
@@ -2500,9 +2508,9 @@ public class SettingsWindow extends javax.swing.JDialog {
         private void sldMenuOpacityStateChanged(javax.swing.event.ChangeEvent evt)// GEN-FIRST:event_sldMenuOpacityStateChanged
         {// GEN-HEADEREND:event_sldMenuOpacityStateChanged
                 if (!sldMenuOpacity.getValueIsAdjusting()) {
-                        if (sldMenuOpacity.getValue() == 0)
-                                sldMenuOpacity.setValue(1);
-                        else {
+                        if (sldMenuOpacity.getValue() == 0) {
+                            sldMenuOpacity.setValue(1);
+                        } else {
                                 menuOpacity = sldMenuOpacity.getValue() / 100.0;
                                 // Menu opacity for FlatLaf will be handled differently
                                 refreshTheme();

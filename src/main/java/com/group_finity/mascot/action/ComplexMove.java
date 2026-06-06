@@ -70,10 +70,12 @@ public class ComplexMove extends BorderedAction
         
         for( String characteristic : getCharacteristics( ).split( "," ) )
         {
-            if( characteristic.equals( getSchema( ).getString( "Breed" ) ) )
+            if( characteristic.equals( getSchema( ).getString( "Breed" ) ) ) {
                 breedEnabled = true;
-            if( characteristic.equals( getSchema( ).getString( "Scan" ) ) )
+            }
+            if( characteristic.equals( getSchema( ).getString( "Scan" ) ) ) {
                 scanEnabled = true;
+            }
         }
         
         if( breedEnabled )
@@ -86,8 +88,9 @@ public class ComplexMove extends BorderedAction
             // cannot broadcast while scanning for an affordance
             getMascot( ).getAffordances( ).clear( );
 
-            if( getMascot( ).getManager( ) != null )
+            if( getMascot( ).getManager( ) != null ) {
                 target = getMascot( ).getManager( ).getMascotWithAffordance( getAffordance( ) );
+            }
             putVariable( getSchema( ).getString( "TargetX" ), target != null && target.get( ) != null ? target.get( ).getAnchor( ).x : null );
             putVariable( getSchema( ).getString( "TargetY" ), target != null && target.get( ) != null ? target.get( ).getAnchor( ).y : null );
         }
@@ -98,8 +101,9 @@ public class ComplexMove extends BorderedAction
     {
         if( scanEnabled )
         {
-            if( getMascot( ).getManager( ) == null )
+            if( getMascot( ).getManager( ) == null ) {
                 return super.hasNext( );
+            }
 
             return super.hasNext( ) && ( turning || ( target != null && target.get( ) != null && target.get( ).getAffordances( ).contains( getAffordance( ) ) ) );
         }
@@ -174,8 +178,9 @@ public class ComplexMove extends BorderedAction
             }
         }
         
-        if( breedEnabled && delegate.isIntervalFrame( ) && !isTurning( ) && delegate.isEnabled( ) )
+        if( breedEnabled && delegate.isIntervalFrame( ) && !isTurning( ) && delegate.isEnabled( ) ) {
             delegate.breed( );
+        }
         
         if( !turning && getMascot( ).getAnchor( ).x == targetX && getMascot( ).getAnchor( ).y == targetY )
         {

@@ -15,8 +15,9 @@ public class SoundLoader
 {
     public static void load( final String name, final float volume ) throws IOException, LineUnavailableException, UnsupportedAudioFileException
     {
-        if( Sounds.contains( name + volume ) )
+        if( Sounds.contains( name + volume ) ) {
             return;
+        }
         
         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream( new File( name ) );
         final Clip clip = AudioSystem.getClip( );

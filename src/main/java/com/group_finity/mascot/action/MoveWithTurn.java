@@ -17,8 +17,9 @@ public class MoveWithTurn extends Move
     {
         super( schema, animations, params );
         
-        if( animations.size( ) < 2 )
+        if( animations.size( ) < 2 ) {
             throw new IllegalArgumentException( "animations.size<2" );
+        }
     }
     
     @Override

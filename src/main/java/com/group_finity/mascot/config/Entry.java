@@ -109,8 +109,9 @@ public class Entry
 
     public List<Entry> getChildren( )
     {
-        if( children != null )
+        if( children != null ) {
             return children;
+        }
 
         children = new ArrayList<>();
         

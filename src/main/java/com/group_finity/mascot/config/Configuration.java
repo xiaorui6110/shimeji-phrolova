@@ -150,8 +150,9 @@ public class Configuration
                 if( nameText != null )
                 {
                     information.put( node.getName( ) + schema.getString( "Name" ), nameText );
-                    if( linkText != null )
+                    if( linkText != null ) {
                         information.put( node.getName( ) + schema.getString( "URL" ), linkText );
+                    }
                 }
             }
         }
@@ -268,16 +269,18 @@ public class Configuration
                 return buildBehavior( schema.getString( UserBehavior.BEHAVIOURNAME_FALL ) );
             }
         }
-        else
+        else {
             throw new BehaviorInstantiationException( Main.getInstance( ).getLanguageBundle( ).getString( "NoBehaviourFoundErrorMessage" ) + " (" + name + ")" );
+        }
     }
 
     public Behavior buildBehavior( final String name ) throws BehaviorInstantiationException
     {
-        if( behaviorBuilders.containsKey( name ) )
+        if( behaviorBuilders.containsKey( name ) ) {
             return getBehaviorBuilders( ).get( name ).buildBehavior( );
-        else
+        } else {
             throw new BehaviorInstantiationException( Main.getInstance( ).getLanguageBundle( ).getString( "NoBehaviourFoundErrorMessage" ) + " (" + name + ")" );
+        }
     }
     
     public boolean isBehaviorEnabled( final BehaviorBuilder builder, final Mascot mascot )
@@ -286,8 +289,9 @@ public class Configuration
         {
             for( String behaviour : Main.getInstance( ).getProperties( ).getProperty( "DisabledBehaviours." + mascot.getImageSet( ), "" ).split( "/" ) )
             {
-                if( behaviour.equals( builder.getName( ) ) )
+                if( behaviour.equals( builder.getName( ) ) ) {
                     return false;
+                }
             }
         }
         return true;
@@ -295,26 +299,29 @@ public class Configuration
     
     public boolean isBehaviorEnabled( final String name, final Mascot mascot )
     {
-        if( behaviorBuilders.containsKey( name ) )
+        if( behaviorBuilders.containsKey( name ) ) {
             return isBehaviorEnabled( getBehaviorBuilders( ).get( name ), mascot );
-        else
+        } else {
             return false;
+        }
     }
     
     public boolean isBehaviorHidden( final String name )
     {
-        if( behaviorBuilders.containsKey( name ) )
+        if( behaviorBuilders.containsKey( name ) ) {
             return getBehaviorBuilders( ).get( name ).isHidden( );
-        else
+        } else {
             return false;
+        }
     }
     
     public boolean isBehaviorToggleable( final String name )
     {
-        if( behaviorBuilders.containsKey( name ) )
+        if( behaviorBuilders.containsKey( name ) ) {
             return getBehaviorBuilders( ).get( name ).isToggleable( );
-        else
+        } else {
             return false;
+        }
     }
     
     private Map<String, String> getConstants( )

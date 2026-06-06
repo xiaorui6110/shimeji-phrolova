@@ -143,8 +143,9 @@ public class BehaviorBuilder {
 	
     public boolean isEffective(final VariableMap context) throws VariableException
     {
-        if( frequency == 0 )
+        if( frequency == 0 ) {
             return false;
+        }
 
         for( final String condition : getConditions( ) )
         {

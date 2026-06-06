@@ -59,15 +59,17 @@ public class ImagePairLoader
      */
     public static void load( final String name, final String rightName, final Point center, final double scaling, final Filter filter, final double opacity ) throws IOException
     {
-        if( ImagePairs.contains( name + ( rightName == null ? "" : rightName ) ) )
+        if( ImagePairs.contains( name + ( rightName == null ? "" : rightName ) ) ) {
             return;
+        }
 
         final BufferedImage leftImage = scale( premultiply( loadImage( name ), opacity ), scaling, filter );
         final BufferedImage rightImage;
-        if( rightName == null )
+        if( rightName == null ) {
             rightImage = flip( leftImage );
-        else
+        } else {
             rightImage = scale( premultiply( loadImage( rightName ), opacity ), scaling, filter );
+        }
 
         ImagePair ip = new ImagePair(new MascotImage( leftImage, new Point( (int)Math.round( center.x * scaling ), (int)Math.round( center.y * scaling ) ) ),
                                      new MascotImage( rightImage, new Point( rightImage.getWidth( ) - (int)Math.round( center.x * scaling ), (int)Math.round( center.y * scaling ) ) ) );
@@ -171,8 +173,9 @@ public class ImagePairLoader
                 rbgValues = buffer;
                 effectiveScaling = 1;
             }
-            else
+            else {
                 filter = Filter.NEAREST_NEIGHBOUR;
+            }
         
             // if hqx is still on then apply the changes
             if( filter == Filter.HQX )
@@ -191,10 +194,11 @@ public class ImagePairLoader
 
                     // resets the srcColIndex to re-use the same indexes and stretch horizontally
                     ++srcRowIndex;
-                    if( srcRowIndex != effectiveScaling )
+                    if( srcRowIndex != effectiveScaling ) {
                         srcColIndex -= workingImage.getWidth( );
-                    else
+                    } else {
                         srcRowIndex = 0;
+                    }
                 }
             }
         }

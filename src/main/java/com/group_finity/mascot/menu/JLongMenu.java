@@ -19,7 +19,7 @@ import java.awt.*;
 public class JLongMenu extends JMenu {
     JLongMenu moreMenu = null;
     int maxItems = 15; // default
- 
+
     public JLongMenu(String label) {
         super(label);
         JMenuItem getHeightMenu = new JMenuItem("Temporary");
@@ -40,9 +40,11 @@ public class JLongMenu extends JMenu {
     // getPopupMenuOrigin. It is pretty much just a copy of
     // JMenu.setPopupMenuVisible
  
+    @Override
     public void setPopupMenuVisible(boolean b) {
-        if (!isEnabled())
+        if (!isEnabled()) {
             return;
+        }
         boolean isVisible = isPopupMenuVisible();
         if (b != isVisible) {
             // We can't call ensurePopupMenuCreated() since it is private so
@@ -65,6 +67,7 @@ public class JLongMenu extends JMenu {
      * {@code @returns} a Point in the coordinate space of the menu instance
      * which should be used as the origin of the JMenu's popup menu.
      */
+    @Override
     protected Point getPopupMenuOrigin() {
         int x = 0;
         int y = 0;
@@ -105,8 +108,9 @@ public class JLongMenu extends JMenu {
                 y = 0;                       // Prefer dropping down
             } else {
                 y = s.height-pmSize.height;  // Otherwise drop 'up'
-                if(y < -position.y)
+                if(y < -position.y) {
                     y = -position.y;
+                }
             }
         } else {
             // We are a toplevel menu (pull-down)
@@ -132,13 +136,15 @@ public class JLongMenu extends JMenu {
                 y = s.height;          // Prefer dropping down
             } else {
                 y = -pmSize.height;   // Otherwise drop 'up'
-                if(y < -position.y)
+                if(y < -position.y) {
                     y = -position.y;
+                }
             }
         }
         return new Point(x,y);
     }
  
+    @Override
     public JMenuItem add (JMenuItem item) {
         if (moreMenu != null) {
             // We already have a more menu - add it there.

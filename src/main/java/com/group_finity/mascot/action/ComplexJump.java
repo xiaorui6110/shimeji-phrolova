@@ -75,10 +75,12 @@ public class ComplexJump extends ActionBase
         
         for( String characteristic : getCharacteristics( ).split( "," ) )
         {
-            if( characteristic.equals( getSchema( ).getString( "Breed" ) ) )
+            if( characteristic.equals( getSchema( ).getString( "Breed" ) ) ) {
                 breedEnabled = true;
-            if( characteristic.equals( getSchema( ).getString( "Scan" ) ) )
+            }
+            if( characteristic.equals( getSchema( ).getString( "Scan" ) ) ) {
                 scanEnabled = true;
+            }
         }
         
         if( breedEnabled )
@@ -91,8 +93,9 @@ public class ComplexJump extends ActionBase
             // cannot broadcast while scanning for an affordance
             getMascot( ).getAffordances( ).clear( );
 
-            if( getMascot( ).getManager( ) != null )
+            if( getMascot( ).getManager( ) != null ) {
                 target = getMascot( ).getManager( ).getMascotWithAffordance( getAffordance( ) );
+            }
             putVariable( getSchema( ).getString( "TargetX" ), target != null && target.get( ) != null ? target.get( ).getAnchor( ).x : null );
             putVariable( getSchema( ).getString( "TargetY" ), target != null && target.get( ) != null ? target.get( ).getAnchor( ).y : null );
         }
@@ -103,8 +106,9 @@ public class ComplexJump extends ActionBase
     {
         if( scanEnabled )
         {
-            if( getMascot( ).getManager( ) == null )
+            if( getMascot( ).getManager( ) == null ) {
                 return super.hasNext( );
+            }
 
             return super.hasNext( ) && target != null && target.get( ) != null && target.get( ).getAffordances( ).contains( getAffordance( ) );
         }
@@ -195,8 +199,9 @@ public class ComplexJump extends ActionBase
             }
         }
         
-        if( breedEnabled && delegate.isIntervalFrame( ) && delegate.isEnabled( ) )
+        if( breedEnabled && delegate.isIntervalFrame( ) && delegate.isEnabled( ) ) {
             delegate.breed( );
+        }
     }
 
     private String getCharacteristics( ) throws VariableException

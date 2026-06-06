@@ -17,5 +17,4 @@ public record MascotImage(NativeImage image, Point center, Dimension size) {
         this(NativeFactory.getInstance().newNativeImage(image), center, new Dimension(image.getWidth(), image.getHeight()));
     }
 
-
 }

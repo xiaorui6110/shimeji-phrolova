@@ -24,9 +24,8 @@ import com.group_finity.mascot.hotspot.Hotspot;
 /**
  * Simple Sample Behavior.
  * <p>
- * Original Author: Yuki Yamada of Group Finity
- * (<a href="http://www.group-finity.com/Shimeji/">...</a>) Currently developed by Shimeji-ee
- * Group.
+ * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
+ * Currently developed by Shimeji-ee Group.
  */
 public class UserBehavior implements Behavior
 {
@@ -112,7 +111,8 @@ public class UserBehavior implements Behavior
      * <p>
      * @ Throws CantBeAliveException
      */
-    public synchronized void mousePressed( final MouseEvent event ) throws CantBeAliveException
+    @Override
+    public synchronized void mousePressed(final MouseEvent event ) throws CantBeAliveException
     {
         if( SwingUtilities.isLeftMouseButton( event ) )
         {
@@ -131,8 +131,9 @@ public class UserBehavior implements Behavior
                         try
                         {
                             getMascot( ).setCursorPosition( event.getPoint( ) );
-                            if( hotspot.behaviour( ) != null )
+                            if( hotspot.behaviour( ) != null ) {
                                 getMascot( ).setBehavior( configuration.buildBehavior( hotspot.behaviour( ), mascot ) );
+                            }
                         }
                         catch( final BehaviorInstantiationException e )
                         {
@@ -176,12 +177,14 @@ public class UserBehavior implements Behavior
      * <p>
      * @ Throws CantBeAliveException
      */
-    public synchronized void mouseReleased( final MouseEvent event ) throws CantBeAliveException
+    @Override
+    public synchronized void mouseReleased(final MouseEvent event ) throws CantBeAliveException
     {
         if( SwingUtilities.isLeftMouseButton( event ) )
         {
-            if( getMascot( ).isHotspotClicked( ) )
+            if( getMascot( ).isHotspotClicked( ) ) {
                 getMascot( ).setCursorPosition( null );
+            }
 
             // check if we are in the middle of a drag, otherwise we do nothing
             if( getMascot( ).isDragging( ) )

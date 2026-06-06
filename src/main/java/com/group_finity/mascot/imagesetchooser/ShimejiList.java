@@ -14,8 +14,9 @@ public class ShimejiList extends JList<ImageSetChooserPanel> {
   }
 
   static class CustomCellRenderer implements ListCellRenderer<ImageSetChooserPanel> {
+    @Override
     public Component getListCellRendererComponent (JList<? extends ImageSetChooserPanel> list, ImageSetChooserPanel value,
-			int index,boolean isSelected,boolean cellHasFocus) {
+                                                   int index, boolean isSelected, boolean cellHasFocus) {
       if (value instanceof ImageSetChooserPanel)
       {
           ((ImageSetChooserPanel) value).setForeground (Color.white);

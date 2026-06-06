@@ -78,7 +78,8 @@ public class ActionBuilder implements IActionBuilder {
 	    return "Action(" + getName( ) + "," + getType( ) + "," + getClassName( ) + ")";
 	}
 
-	@SuppressWarnings("unchecked")
+	@Override
+    @SuppressWarnings("unchecked")
 	public Action buildAction( final Map<String, String> params) throws ActionInstantiationException {
 
 		try {
@@ -138,7 +139,8 @@ public class ActionBuilder implements IActionBuilder {
 		}
 	}
 
-	public void validate() throws ConfigurationException {
+	@Override
+    public void validate() throws ConfigurationException {
 
 		for (final IActionBuilder ref : this.getActionRefs()) {
 			ref.validate();

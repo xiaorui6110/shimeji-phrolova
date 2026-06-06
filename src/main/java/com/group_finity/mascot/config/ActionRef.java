@@ -59,7 +59,8 @@ public class ActionRef implements IActionBuilder {
 		}
 	}
 
-	public Action buildAction( final Map<String, String> params) throws ActionInstantiationException {
+	@Override
+    public Action buildAction(final Map<String, String> params) throws ActionInstantiationException {
 		final Map<String, String> newParams = new LinkedHashMap<>(params);
 		newParams.putAll(getParams());
 		return this.getConfiguration().buildAction(getName(), newParams);

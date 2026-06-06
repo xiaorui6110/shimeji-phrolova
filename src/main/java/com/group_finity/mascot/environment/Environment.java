@@ -131,18 +131,22 @@ public abstract class Environment
 
         for( Area area: getScreens( ) )
         {
-            if( area.getTopBorder( ).isOn( location ) )
+            if( area.getTopBorder( ).isOn( location ) ) {
                 ++count;
-            if( area.getBottomBorder( ).isOn( location ) )
+            }
+            if( area.getBottomBorder( ).isOn( location ) ) {
                 ++count;
+            }
         }
 
         if( count==0 )
         {
-            if( getWorkArea( ).getTopBorder( ).isOn( location ) )
+            if( getWorkArea( ).getTopBorder( ).isOn( location ) ) {
                 return true;
-            if( getWorkArea( ).getBottomBorder( ).isOn( location ) )
+            }
+            if( getWorkArea( ).getBottomBorder( ).isOn( location ) ) {
                 return true;
+            }
         }
 
         return count == 1;
@@ -154,18 +158,22 @@ public abstract class Environment
 
         for( Area area: getScreens( ) )
         {   
-            if( area.getLeftBorder( ).isOn( location ) )
+            if( area.getLeftBorder( ).isOn( location ) ) {
                 ++count;
-            if( area.getRightBorder( ).isOn( location ) )
+            }
+            if( area.getRightBorder( ).isOn( location ) ) {
                 ++count;
+            }
         }
 
         if( count == 0 )
         {
-            if( getWorkArea( ).getLeftBorder( ).isOn( location ) )
+            if( getWorkArea( ).getLeftBorder( ).isOn( location ) ) {
                 return true;
-            if( getWorkArea( ).getRightBorder( ).isOn( location ) )
+            }
+            if( getWorkArea( ).getRightBorder( ).isOn( location ) ) {
                 return true;
+            }
         }
 
         return count == 1;

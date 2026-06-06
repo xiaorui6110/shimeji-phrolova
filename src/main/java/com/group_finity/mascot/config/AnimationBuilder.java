@@ -40,8 +40,9 @@ public class AnimationBuilder
 
     public AnimationBuilder( final ResourceBundle schema, final Entry animationNode, final String imageSet ) throws IOException
     {
-        if(!imageSet.isEmpty())
+        if(!imageSet.isEmpty()) {
             this.imageSet = "/"+imageSet;
+        }
 
         this.schema = schema;
         this.condition = animationNode.getAttribute( schema.getString( "Condition" ) ) == null ? "true" : animationNode.getAttribute( schema.getString( "Condition" ) );
@@ -77,10 +78,11 @@ public class AnimationBuilder
         
         String filterText = Main.getInstance( ).getProperties( ).getProperty( "Filter", "false" );
         Filter filter = Filter.NEAREST_NEIGHBOUR;
-        if( filterText.equalsIgnoreCase( "true" ) || filterText.equalsIgnoreCase( "hqx" ) )
-            filter = ImagePairLoader.Filter.HQX;
-        else if( filterText.equalsIgnoreCase( "bicubic" ) )
-            filter = ImagePairLoader.Filter.BICUBIC;
+        if( filterText.equalsIgnoreCase( "true" ) || filterText.equalsIgnoreCase( "hqx" ) ) {
+            filter = Filter.HQX;
+        } else if( filterText.equalsIgnoreCase( "bicubic" ) ) {
+            filter = Filter.BICUBIC;
+        }
 
         if( imageText != null )
         {
@@ -94,8 +96,9 @@ public class AnimationBuilder
             catch( Exception e )
             {
                 String error = imageText;
-                if( imageRightText != null )
+                if( imageRightText != null ) {
                     error += ", " + imageRightText;
+                }
                 log.log( Level.SEVERE, "Failed to load image: {0}", error );
                 throw new IOException( Main.getInstance( ).getLanguageBundle( ).getString( "FailedLoadImageErrorMessage" ) + " " + error );
             }
@@ -113,12 +116,13 @@ public class AnimationBuilder
         {
             try
             {
-                if( new File( "./sound" + soundText ).exists( ) )
+                if( new File( "./sound" + soundText ).exists( ) ) {
                     soundText = "./sound" + soundText;
-                else if( new File( "./sound" + imageSet + soundText ).exists( ) )
+                } else if( new File( "./sound" + imageSet + soundText ).exists( ) ) {
                     soundText = "./sound" + imageSet + soundText;
-                else
+                } else {
                     soundText = "./img" + imageSet + "/sound" + soundText;
+                }
 
                 SoundLoader.load( soundText, Float.parseFloat( volumeText ) );
                 soundText += Float.parseFloat( volumeText );

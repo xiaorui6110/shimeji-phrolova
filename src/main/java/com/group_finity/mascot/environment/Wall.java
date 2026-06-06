@@ -60,7 +60,8 @@ public class Wall implements Border {
 				&& (location.y <= getBottom());
 	}
 
-	public Point move(final Point location) {
+	@Override
+    public Point move(final Point location) {
 
 		if (!getArea().isVisible()) {
 			return location;

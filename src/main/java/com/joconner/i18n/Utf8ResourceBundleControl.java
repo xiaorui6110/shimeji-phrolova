@@ -23,8 +23,9 @@ public class Utf8ResourceBundleControl extends PackageableResourceControl {
         super(isPackageBased);
     }
 
+    @Override
     public ResourceBundle newBundle(String baseName, Locale locale, String format,
-            ClassLoader loader, boolean reload)
+                                    ClassLoader loader, boolean reload)
             throws IllegalAccessException, InstantiationException, IOException {
         String bundleName = toBundleName(baseName, locale);
         ResourceBundle bundle = null;

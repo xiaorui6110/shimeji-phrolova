@@ -13,9 +13,8 @@ import com.group_finity.mascot.script.VariableMap;
 import java.util.logging.Level;
 
 /**
- * Original Author: Yuki Yamada of Group Finity
- * (<a href="http://www.group-finity.com/Shimeji/">...</a>) Currently developed by Shimeji-ee
- * Group.
+ * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
+ * Currently developed by Shimeji-ee Group.
  */
 public class Interact extends Animate
 {

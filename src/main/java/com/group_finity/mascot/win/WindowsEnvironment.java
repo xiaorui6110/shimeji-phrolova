@@ -110,21 +110,25 @@ class WindowsEnvironment extends Environment {
                                                                                                            // on 7 so
                                                                                                            // skip the
                                                                                                            // check
+            {
                 return IEResult.NOT_IE;
+            }
 
             // int flags = User32.INSTANCE.GetWindowLongW( ie, User32.GWL_STYLE );
             // if( ( flags & User32.WS_MAXIMIZE ) != 0 )
             // return IEResult.INVALID;
 
-            if (User32.INSTANCE.IsZoomed(ie) != 0)
+            if (User32.INSTANCE.IsZoomed(ie) != 0) {
                 return IEResult.INVALID;
+            }
 
             if (isIE(ie) && (User32.INSTANCE.IsIconic(ie) == 0)) {
                 Rectangle ieRect = getIERect(ie);
-                if (ieRect.intersects(getScreenRect()))
+                if (ieRect.intersects(getScreenRect())) {
                     return IEResult.IE;
-                else
+                } else {
                     return IEResult.IE_OUT_OF_BOUNDS;
+                }
             }
         }
 

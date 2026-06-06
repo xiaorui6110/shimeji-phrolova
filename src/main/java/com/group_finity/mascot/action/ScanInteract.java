@@ -80,8 +80,9 @@ public class ScanInteract extends BorderedAction
         }
         
         // refresh target
-        if( getMascot( ).getManager( ) != null && ( target == null || target.get( ) == null || !target.get( ).getAffordances( ).contains( getAffordance( ) ) ) )
+        if( getMascot( ).getManager( ) != null && ( target == null || target.get( ) == null || !target.get( ).getAffordances( ).contains( getAffordance( ) ) ) ) {
             target = getMascot( ).getManager( ).getMascotWithAffordance( getAffordance( ) );
+        }
         
         putVariable( getSchema( ).getString( "TargetX" ), target != null && target.get( ) != null ? target.get( ).getAnchor( ).x : null );
         putVariable( getSchema( ).getString( "TargetY" ), target != null && target.get( ) != null ? target.get( ).getAnchor( ).y : null );

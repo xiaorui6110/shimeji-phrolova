@@ -1250,6 +1250,7 @@ public class X {
         }
 
 
+        @Override
         public String toString() {
             return x11Window.toString();
         }

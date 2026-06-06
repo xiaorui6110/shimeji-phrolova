@@ -33,8 +33,9 @@ public class Mute extends InstantAction
             {
                 for( Clip clip : clips )
                 { 
-                    if( clip != null && clip.isRunning( ) )
+                    if( clip != null && clip.isRunning( ) ) {
                         clip.stop( );
+                    }
                 }
             }
             else
@@ -44,8 +45,9 @@ public class Mute extends InstantAction
                 {
                     for( Clip clip : clips )
                     { 
-                        if( clip != null && clip.isRunning( ) )
+                        if( clip != null && clip.isRunning( ) ) {
                             clip.stop( );
+                        }
                     }
                 }
                 else
@@ -53,8 +55,9 @@ public class Mute extends InstantAction
                     clips = Sounds.getSoundsIgnoringVolume( "./img/" + getMascot( ).getImageSet( ) + "/sound" + soundName );
                     for( Clip clip : clips )
                     { 
-                        if( clip != null && clip.isRunning( ) )
+                        if( clip != null && clip.isRunning( ) ) {
                             clip.stop( );
+                        }
                     }
                 }
             }

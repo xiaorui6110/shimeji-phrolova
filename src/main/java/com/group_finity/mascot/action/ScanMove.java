@@ -54,8 +54,9 @@ public class ScanMove extends BorderedAction
         // cannot broadcast while scanning for an affordance
         getMascot( ).getAffordances( ).clear( );
         
-        if( getMascot( ).getManager( ) != null )
+        if( getMascot( ).getManager( ) != null ) {
             target = getMascot( ).getManager( ).getMascotWithAffordance( getAffordance( ) );
+        }
         putVariable( getSchema( ).getString( "TargetX" ), target != null && target.get( ) != null ? target.get( ).getAnchor( ).x : null );
         putVariable( getSchema( ).getString( "TargetY" ), target != null && target.get( ) != null ? target.get( ).getAnchor( ).y : null );
     }
@@ -63,8 +64,9 @@ public class ScanMove extends BorderedAction
     @Override
     public boolean hasNext( ) throws VariableException
     {
-        if( getMascot( ).getManager( ) == null )
+        if( getMascot( ).getManager( ) == null ) {
             return super.hasNext( );
+        }
         
         return super.hasNext( ) && ( turning || ( target != null && target.get( ) != null && target.get( ).getAffordances( ).contains( getAffordance( ) ) ) );
     }

@@ -36,10 +36,6 @@ import com.group_finity.mascot.exception.CantBeAliveException;
 import com.group_finity.mascot.exception.ConfigurationException;
 import com.group_finity.mascot.image.ImagePairs;
 import com.group_finity.mascot.imagesetchooser.ImageSetChooser;
-import com.group_finity.mascot.license.LicenseManager;
-import com.group_finity.mascot.license.LicenseChecker;
-import com.group_finity.mascot.license.LicenseLevel;
-import com.group_finity.mascot.license.LicenseActivationDialog;
 import com.group_finity.mascot.sound.Sounds;
 import com.joconner.i18n.Utf8ResourceBundleControl;
 import com.formdev.flatlaf.FlatLaf;
@@ -373,10 +369,11 @@ public class Main {
     public void run() {
 
         // 检测操作系统
-        if (!System.getProperty("sun.arch.data.model").equals("64"))
+        if (!System.getProperty("sun.arch.data.model").equals("64")) {
             platform = Platform.x86;
-        else
+        } else {
             platform = Platform.x86_64;
+        }
         // load properties
         properties = new Properties();
         
@@ -461,13 +458,6 @@ public class Main {
         // Create the tray icon
         createTrayIcon();
 
-        // Initialize license system and show warning if needed
-        LicenseManager licenseManager = LicenseManager.getInstance();
-        log.info("License System Initialized - Current Level: " + licenseManager.getCurrentLicenseLevel().getDisplayName());
-        
-        // Show license expiration warning if needed
-        LicenseChecker.showExpirationWarningIfNeeded();
-
         // Create the first mascot
         for (String imageSet : imageSets) {
             String informationAlreadySeen = properties.getProperty("InformationDismissed", "");
@@ -506,40 +496,43 @@ public class Main {
             // try to load in the correct xml files
             String filePath = baseDir + "/conf/";
             String actionsFile = filePath + "actions.xml";
-            if (new File(filePath + "動作.xml").exists())
+            if (new File(filePath + "動作.xml").exists()) {
                 actionsFile = filePath + "動作.xml";
+            }
 
             filePath = baseDir + "/conf/" + imageSet + "/";
-            if (new File(filePath + "actions.xml").exists())
+            if (new File(filePath + "actions.xml").exists()) {
                 actionsFile = filePath + "actions.xml";
-            else if (new File(filePath + "動作.xml").exists())
+            } else if (new File(filePath + "動作.xml").exists()) {
                 actionsFile = filePath + "動作.xml";
-            else if (new File(filePath + "Õïòõ¢£.xml").exists())
+            } else if (new File(filePath + "Õïòõ¢£.xml").exists()) {
                 actionsFile = filePath + "Õïòõ¢£.xml";
-            else if (new File(filePath + "¦-º@.xml").exists())
+            } else if (new File(filePath + "¦-º@.xml").exists()) {
                 actionsFile = filePath + "¦-º@.xml";
-            else if (new File(filePath + "ô«ìý.xml").exists())
+            } else if (new File(filePath + "ô«ìý.xml").exists()) {
                 actionsFile = filePath + "ô«ìý.xml";
-            else if (new File(filePath + "one.xml").exists())
+            } else if (new File(filePath + "one.xml").exists()) {
                 actionsFile = filePath + "one.xml";
-            else if (new File(filePath + "1.xml").exists())
+            } else if (new File(filePath + "1.xml").exists()) {
                 actionsFile = filePath + "1.xml";
+            }
 
             filePath = baseDir + "/img/" + imageSet + "/conf/";
-            if (new File(filePath + "actions.xml").exists())
+            if (new File(filePath + "actions.xml").exists()) {
                 actionsFile = filePath + "actions.xml";
-            else if (new File(filePath + "動作.xml").exists())
+            } else if (new File(filePath + "動作.xml").exists()) {
                 actionsFile = filePath + "動作.xml";
-            else if (new File(filePath + "Õïòõ¢£.xml").exists())
+            } else if (new File(filePath + "Õïòõ¢£.xml").exists()) {
                 actionsFile = filePath + "Õïòõ¢£.xml";
-            else if (new File(filePath + "¦-º@.xml").exists())
+            } else if (new File(filePath + "¦-º@.xml").exists()) {
                 actionsFile = filePath + "¦-º@.xml";
-            else if (new File(filePath + "ô«ìý.xml").exists())
+            } else if (new File(filePath + "ô«ìý.xml").exists()) {
                 actionsFile = filePath + "ô«ìý.xml";
-            else if (new File(filePath + "one.xml").exists())
+            } else if (new File(filePath + "one.xml").exists()) {
                 actionsFile = filePath + "one.xml";
-            else if (new File(filePath + "1.xml").exists())
+            } else if (new File(filePath + "1.xml").exists()) {
                 actionsFile = filePath + "1.xml";
+            }
 
             log.log(Level.INFO, imageSet + " Read Action File ({0})", actionsFile);
 
@@ -552,44 +545,47 @@ public class Main {
 
             filePath = baseDir + "/conf/";
             String behaviorsFile = filePath + "behaviors.xml";
-            if (new File(filePath + "行動.xml").exists())
+            if (new File(filePath + "行動.xml").exists()) {
                 behaviorsFile = filePath + "行動.xml";
+            }
 
             filePath = baseDir + "/conf/" + imageSet + "/";
-            if (new File(filePath + "behaviors.xml").exists())
+            if (new File(filePath + "behaviors.xml").exists()) {
                 behaviorsFile = filePath + "behaviors.xml";
-            else if (new File(filePath + "behavior.xml").exists())
+            } else if (new File(filePath + "behavior.xml").exists()) {
                 behaviorsFile = filePath + "behavior.xml";
-            else if (new File(filePath + "行動.xml").exists())
+            } else if (new File(filePath + "行動.xml").exists()) {
                 behaviorsFile = filePath + "行動.xml";
-            else if (new File(filePath + "ÞíîÕïò.xml").exists())
+            } else if (new File(filePath + "ÞíîÕïò.xml").exists()) {
                 behaviorsFile = filePath + "ÞíîÕïò.xml";
-            else if (new File(filePath + "ªµ¦-.xml").exists())
+            } else if (new File(filePath + "ªµ¦-.xml").exists()) {
                 behaviorsFile = filePath + "ªµ¦-.xml";
-            else if (new File(filePath + "ìsô«.xml").exists())
+            } else if (new File(filePath + "ìsô«.xml").exists()) {
                 behaviorsFile = filePath + "ìsô«.xml";
-            else if (new File(filePath + "two.xml").exists())
+            } else if (new File(filePath + "two.xml").exists()) {
                 behaviorsFile = filePath + "two.xml";
-            else if (new File(filePath + "2.xml").exists())
+            } else if (new File(filePath + "2.xml").exists()) {
                 behaviorsFile = filePath + "2.xml";
+            }
 
             filePath = baseDir + "/img/" + imageSet + "/conf/";
-            if (new File(filePath + "behaviors.xml").exists())
+            if (new File(filePath + "behaviors.xml").exists()) {
                 behaviorsFile = filePath + "behaviors.xml";
-            else if (new File(filePath + "behavior.xml").exists())
+            } else if (new File(filePath + "behavior.xml").exists()) {
                 behaviorsFile = filePath + "behavior.xml";
-            else if (new File(filePath + "行動.xml").exists())
+            } else if (new File(filePath + "行動.xml").exists()) {
                 behaviorsFile = filePath + "行動.xml";
-            else if (new File(filePath + "ÞíîÕïò.xml").exists())
+            } else if (new File(filePath + "ÞíîÕïò.xml").exists()) {
                 behaviorsFile = filePath + "ÞíîÕïò.xml";
-            else if (new File(filePath + "ªµ¦-.xml").exists())
+            } else if (new File(filePath + "ªµ¦-.xml").exists()) {
                 behaviorsFile = filePath + "ªµ¦-.xml";
-            else if (new File(filePath + "ìsô«.xml").exists())
+            } else if (new File(filePath + "ìsô«.xml").exists()) {
                 behaviorsFile = filePath + "ìsô«.xml";
-            else if (new File(filePath + "two.xml").exists())
+            } else if (new File(filePath + "two.xml").exists()) {
                 behaviorsFile = filePath + "two.xml";
-            else if (new File(filePath + "2.xml").exists())
+            } else if (new File(filePath + "2.xml").exists()) {
                 behaviorsFile = filePath + "2.xml";
+            }
 
             log.log(Level.INFO, imageSet + " Read Behavior File ({0})", behaviorsFile);
 
@@ -602,12 +598,14 @@ public class Main {
             String infoFile = filePath + "info.xml";
 
             filePath = baseDir + "/conf/" + imageSet + "/";
-            if (new File(filePath + "info.xml").exists())
+            if (new File(filePath + "info.xml").exists()) {
                 infoFile = filePath + "info.xml";
+            }
 
             filePath = baseDir + "/img/" + imageSet + "/conf/";
-            if (new File(filePath + "info.xml").exists())
+            if (new File(filePath + "info.xml").exists()) {
                 infoFile = filePath + "info.xml";
+            }
 
             if (new File(infoFile).exists()) {
                 log.log(Level.INFO, imageSet + " Read Information File ({0})", infoFile);
@@ -630,18 +628,22 @@ public class Main {
                     // Handle BornMascot attribute
                     if (node.getAttributes().containsKey("BornMascot")) {
                         String set = node.getAttribute("BornMascot");
-                        if (!childMascots.contains(set))
+                        if (!childMascots.contains(set)) {
                             childMascots.add(set);
-                        if (!configurations.containsKey(set))
+                        }
+                        if (!configurations.containsKey(set)) {
                             loadConfiguration(set);
+                        }
                     }
                     // Handle TransformMascot attribute
                     if (node.getAttributes().containsKey("TransformMascot")) {
                         String set = node.getAttribute("TransformMascot");
-                        if (!childMascots.contains(set))
+                        if (!childMascots.contains(set)) {
                             childMascots.add(set);
-                        if (!configurations.containsKey(set))
+                        }
+                        if (!configurations.containsKey(set)) {
                             loadConfiguration(set);
+                        }
                     }
                 }
             }
@@ -745,15 +747,17 @@ public class Main {
             Main.showError(languageBundle.getString("FailedDisplaySystemTrayErrorMessage") + "\n"
                     + languageBundle.getString("SeeLogForDetails"));
         } finally {
-            if (image == null)
+            if (image == null) {
                 image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_RGB);
+            }
         }
 
         try {
             // Create the tray icon
             String caption = properties.getProperty("ShimejiEENameOverride", "").trim();
-            if (caption.isEmpty())
+            if (caption.isEmpty()) {
                 caption = languageBundle.getString("ShimejiEE");
+            }
             final TrayIcon icon = new TrayIcon(image, caption);
 
             // attach menu
@@ -770,8 +774,9 @@ public class Main {
                 public void mouseReleased(MouseEvent event) {
                     if (shouldShowPopupMenu(event)) {
                         // close the form if it's open
-                        if (form != null)
+                        if (form != null) {
                             form.dispose();
+                        }
 
                         // create the form and border
                         form = new JDialog(frame, false);
@@ -967,8 +972,9 @@ public class Main {
 
                                 Main.this.getManager().setExitOnLastRemoved(isExit);
                             }
-                            if (dialog.getInteractiveWindowReloadRequired())
+                            if (dialog.getInteractiveWindowReloadRequired()) {
                                 NativeFactory.getInstance().getEnvironment().refreshCache();
+                            }
                         });
 
                         final JButton btnLanguage = new JButton(languageBundle.getString("Language"));
@@ -1062,15 +1068,6 @@ public class Main {
                             }
                         });
 
-                        // License button
-                        final JButton btnLicense = new JButton();
-                        Main.this.updateLicenseButtonText(btnLicense);
-                        btnLicense.addActionListener(e -> {
-                            form.dispose();
-                            LicenseActivationDialog.showDialog(frame, languageBundle);
-                            Main.this.updateLicenseButtonText(btnLicense); // Update button text after activation
-                        });
-
                         JButton btnPauseAll = new JButton(
                                 getManager().isPaused() ? languageBundle.getString("ResumeAnimations")
                                         : languageBundle.getString("PauseAnimations"));
@@ -1110,8 +1107,6 @@ public class Main {
                         gridBag.gridy++;
                         panel.add(btnAutoStart, gridBag);
                         gridBag.gridy++;
-                        panel.add(btnLicense, gridBag);
-                        gridBag.gridy++;
                         panel.add(new JSeparator(), gridBag);
                         gridBag.gridy++;
                         panel.add(btnPauseAll, gridBag);
@@ -1127,7 +1122,7 @@ public class Main {
                         setupTrayMenuAutoSizing(form, panel, scaling, icon, event,
                             btnCallShimeji, btnFollowCursor, btnReduceToOne, btnRestoreWindows,
                             btnAllowedBehaviours, btnChooseShimeji, btnSettings, btnLanguage,
-                            btnAutoStart, btnLicense, btnPauseAll, btnDismissAll);
+                            btnAutoStart, btnPauseAll, btnDismissAll);
                         form.setMinimumSize(form.getSize());
                     } else if (event.getButton() == MouseEvent.BUTTON1) {
                         createMascot();
@@ -1274,10 +1269,12 @@ public class Main {
         ArrayList<String> list = new ArrayList<>();
         String[] data = properties.getProperty("InformationDismissed", "").split("/");
 
-        if (data.length > 0 && !data[0].isEmpty())
+        if (data.length > 0 && !data[0].isEmpty()) {
             list.addAll(Arrays.asList(data));
-        if (!list.contains(imageSet))
+        }
+        if (!list.contains(imageSet)) {
             list.add(imageSet);
+        }
 
         properties.setProperty("InformationDismissed",
                 list.toString().replace("[", "").replace("]", "").replace(", ", "/"));
@@ -1287,19 +1284,22 @@ public class Main {
         ArrayList<String> list = new ArrayList<>();
         String[] data = properties.getProperty("DisabledBehaviours." + mascot.getImageSet(), "").split("/");
 
-        if (data.length > 0 && !data[0].isEmpty())
+        if (data.length > 0 && !data[0].isEmpty()) {
             list.addAll(Arrays.asList(data));
+        }
 
-        if (list.contains(name) && enabled)
+        if (list.contains(name) && enabled) {
             list.remove(name);
-        else if (!list.contains(name) && !enabled)
+        } else if (!list.contains(name) && !enabled) {
             list.add(name);
+        }
 
-        if (!list.isEmpty())
+        if (!list.isEmpty()) {
             properties.setProperty("DisabledBehaviours." + mascot.getImageSet(),
                     list.toString().replace("[", "").replace("]", "").replace(", ", "/"));
-        else
+        } else {
             properties.remove("DisabledBehaviours." + mascot.getImageSet());
+        }
 
         updateConfigFile();
     }
@@ -1338,8 +1338,9 @@ public class Main {
      * @author snek, with some tweaks by Kilkakon
      */
     private void setActiveImageSets(ArrayList<String> newImageSets) {
-        if (newImageSets == null)
+        if (newImageSets == null) {
             return;
+        }
 
         // I don't think there would be enough imageSets chosen at any given
         // time for it to be worth using HashSet but i might be wrong
@@ -1349,21 +1350,25 @@ public class Main {
         ArrayList<String> toAdd = new ArrayList<>();
         ArrayList<String> toRetain = new ArrayList<>();
         for (String set : newImageSets) {
-            if (!imageSets.contains(set))
+            if (!imageSets.contains(set)) {
                 toAdd.add(set);
-            if (!toRetain.contains(set))
+            }
+            if (!toRetain.contains(set)) {
                 toRetain.add(set);
+            }
             populateArrayListWithChildSets(set, toRetain);
         }
 
         boolean isExit = Main.this.getManager().isExitOnLastRemoved();
         Main.this.getManager().setExitOnLastRemoved(false);
 
-        for (String r : toRemove)
+        for (String r : toRemove) {
             removeLoadedImageSet(r, toRetain);
+        }
 
-        for (String a : toAdd)
+        for (String a : toAdd) {
             addImageSet(a);
+        }
 
         Main.this.getManager().setExitOnLastRemoved(isExit);
     }
@@ -1586,41 +1591,6 @@ public class Main {
             languageBundle.getString("DisableAutoStart") : 
             languageBundle.getString("EnableAutoStart");
         btnAutoStart.setText(text);
-    }
-    
-    /**
-     * 更新许可证按钮的文本
-     */
-    private void updateLicenseButtonText(JButton btnLicense) {
-        LicenseManager manager = LicenseManager.getInstance();
-        LicenseLevel currentLevel = manager.getCurrentLicenseLevel();
-        
-        String text;
-        switch (currentLevel) {
-            case NO_KEY:
-                text = languageBundle.getString("License") + " - " + languageBundle.getString("FreeVersion");
-                break;
-            case ADVANCED_KEY:
-                long daysRemaining = manager.getDaysRemaining();
-                text = String.format("%s - %s (%d %s)", 
-                    languageBundle.getString("License"),
-                    languageBundle.getString("AdvancedVersion"),
-                    daysRemaining,
-                    languageBundle.getString("DaysRemaining").toLowerCase());
-                break;
-            case SPECIAL_KEY:
-                long specialDaysRemaining = manager.getDaysRemaining();
-                text = String.format("%s - %s (%d %s)", 
-                    languageBundle.getString("License"),
-                    languageBundle.getString("DeveloperVersion"),
-                    specialDaysRemaining,
-                    languageBundle.getString("DaysRemaining").toLowerCase());
-                break;
-            default:
-                text = languageBundle.getString("License");
-                break;
-        }
-        btnLicense.setText(text);
     }
     
     /**

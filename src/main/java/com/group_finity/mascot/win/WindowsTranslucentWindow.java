@@ -126,7 +126,8 @@ class WindowsTranslucentWindow extends JWindow implements TranslucentWindow {
 		return this.image;
 	}
 
-	public void setImage(final NativeImage image) {
+	@Override
+    public void setImage(final NativeImage image) {
 		this.image = (WindowsNativeImage) image;
 	}
 

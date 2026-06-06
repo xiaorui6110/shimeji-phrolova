@@ -158,25 +158,27 @@ public class Mascot {
         getWindow().asComponent().addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseMoved(final MouseEvent e) {
-                if (paused)
+                if (paused) {
                     refreshCursor(false);
-                else {
-                    if (isHotspotClicked())
+                } else {
+                    if (isHotspotClicked()) {
                         setCursorPosition(e.getPoint());
-                    else
+                    } else {
                         refreshCursor(e.getPoint());
+                    }
                 }
             }
 
             @Override
             public void mouseDragged(final MouseEvent e) {
-                if (paused)
+                if (paused) {
                     refreshCursor(false);
-                else {
-                    if (isHotspotClicked())
+                } else {
+                    if (isHotspotClicked()) {
                         setCursorPosition(e.getPoint());
-                    else
+                    } else {
                         refreshCursor(e.getPoint());
+                    }
                 }
             }
         });
@@ -361,10 +363,12 @@ public class Mascot {
         popup.add(restoreMenu);
         popup.add(debugMenu);
         popup.add(new JSeparator());
-        if (submenu.getMenuComponentCount() > 0)
+        if (submenu.getMenuComponentCount() > 0) {
             popup.add(submenu);
-        if (allowedSubmenu.getMenuComponentCount() > 0)
+        }
+        if (allowedSubmenu.getMenuComponentCount() > 0) {
             popup.add(allowedSubmenu);
+        }
         popup.add(new JSeparator());
         popup.add(pauseMenu);
         popup.add(new JSeparator());
@@ -657,15 +661,17 @@ public class Mascot {
     public void setCursorPosition(final Point point) {
         cursor = point;
 
-        if (point == null)
+        if (point == null) {
             refreshCursor(false);
-        else
+        } else {
             refreshCursor(point);
+        }
     }
 
     public VariableMap getVariables() {
-        if (variables == null)
+        if (variables == null) {
             variables = new VariableMap();
+        }
         return variables;
     }
 }

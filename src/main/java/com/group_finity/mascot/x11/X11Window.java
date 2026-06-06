@@ -130,6 +130,7 @@ public class X11Window {
         this.right = right;
     }
 
+    @Override
     public String toString() {
         return "Frame Border: top:" + top_border + " left:" + left_border + " bottom:" + bottom_border + " right:" + right_border;
     }

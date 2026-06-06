@@ -16,8 +16,9 @@ public record Hotspot(String behaviour, Shape shape) {
 
     public boolean contains(Mascot mascot, Point point) {
         // flip if facing right
-        if (mascot.isLookRight())
+        if (mascot.isLookRight()) {
             point = new Point(mascot.getBounds().width - point.x, point.y);
+        }
 
         return shape.contains(point);
     }

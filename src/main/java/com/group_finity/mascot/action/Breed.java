@@ -109,14 +109,16 @@ public class Breed extends Animate
 
         void validateBornCount( ) throws VariableException
         {
-            if( getBornCount( ) < 1 )
+            if( getBornCount( ) < 1 ) {
                 throw new VariableException( "BornCount must be positive" );
+            }
         }
 
         void validateBornInterval( ) throws VariableException
         {
-            if( getBornInterval( ) < 1 )
+            if( getBornInterval( ) < 1 ) {
                 throw new VariableException( "BornInterval must be positive" );
+            }
         }
 
         private int getBornX( ) throws VariableException
@@ -175,7 +177,8 @@ public class Breed extends Animate
     {
         super.tick( );
 
-        if( delegate.isPenultimateFrame( ) && delegate.isEnabled( ) )
+        if( delegate.isPenultimateFrame( ) && delegate.isEnabled( ) ) {
             delegate.breed( );
+        }
     }
 }
