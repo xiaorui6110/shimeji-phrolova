@@ -2222,8 +2222,6 @@ public class SettingsWindow extends javax.swing.JDialog {
                 alwaysShowShimejiChooser = evt.getStateChange() == ItemEvent.SELECTED;
         }// GEN-LAST:event_chkAlwaysShowShimejiChooserItemStateChanged
 
-        // TODO delete license check
-
         private void radFilterItemStateChanged(java.awt.event.ItemEvent evt)// GEN-FIRST:event_radFilterItemStateChanged
         {// GEN-HEADEREND:event_radFilterItemStateChanged
                 if (evt.getStateChange() == ItemEvent.SELECTED) {
@@ -2232,26 +2230,7 @@ public class SettingsWindow extends javax.swing.JDialog {
                         if (source == radFilterNearest) {
                             filter = "nearest";
                         } else if (source == radFilterHqx) {
-                                // Check license for HQX filter
-                                LicenseManager licenseManager = LicenseManager.getInstance();
-                                LicenseLevel currentLevel = licenseManager.getCurrentLicenseLevel();
-
-                                if (currentLevel == LicenseLevel.NO_KEY) {
-                                        // For free version, deny HQX filter access
-                                        JOptionPane.showMessageDialog(this,
-                                                        Main.getInstance().getLanguageBundle()
-                                                                        .getString("PremiumFeatureRequired"),
-                                                        Main.getInstance().getLanguageBundle()
-                                                                        .getString("LicenseRequired"),
-                                                        JOptionPane.WARNING_MESSAGE);
-
-                                        // Revert to nearest neighbor filter
-                                        radFilterNearest.setSelected(true);
-                                        filter = "nearest";
-                                } else {
-                                        // Advanced or Special license - allow HQX
-                                        filter = "hqx";
-                                }
+                            filter = "hqx";
                         } else {
                             filter = "bicubic";
                         }
@@ -2294,21 +2273,7 @@ public class SettingsWindow extends javax.swing.JDialog {
                                 }
                                 
                                 if (scaling == 2 || scaling == 3 || scaling == 4) {
-                                        // Check license before enabling HQX filter
-                                        LicenseManager licenseManager = LicenseManager.getInstance();
-                                        LicenseLevel currentLevel = licenseManager.getCurrentLicenseLevel();
-
-                                        if (currentLevel == LicenseLevel.NO_KEY) {
-                                                // For free version, disable HQX filter
-                                                radFilterHqx.setEnabled(false);
-                                                if (filter.equals("hqx")) {
-                                                        radFilterNearest.setSelected(true);
-                                                        filter = "nearest";
-                                                }
-                                        } else {
-                                                // Advanced or Special license - enable HQX
-                                                radFilterHqx.setEnabled(true);
-                                        }
+                                        radFilterHqx.setEnabled(true); // 整数倍率下 HQX 可用
                                 } else {
                                         radFilterHqx.setEnabled(false);
                                         if (filter.equals("hqx")) {

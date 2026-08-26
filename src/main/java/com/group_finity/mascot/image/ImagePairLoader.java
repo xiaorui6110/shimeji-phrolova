@@ -13,8 +13,6 @@ import javax.imageio.ImageIO;
 
 import hqx.*;
 import java.awt.Color;
-import com.group_finity.mascot.license.LicenseManager;
-import com.group_finity.mascot.license.LicenseLevel;
 
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
@@ -123,21 +121,6 @@ public class ImagePairLoader
         int width = source.getWidth( );
         int height = source.getHeight( );
         BufferedImage workingImage = null;
-        
-        // Check license for HQX filter usage
-        if (filter == Filter.HQX) {
-            LicenseManager licenseManager = LicenseManager.getInstance();
-            LicenseLevel currentLevel = licenseManager.getCurrentLicenseLevel();
-            
-            // Only allow HQX filter for Advanced and Special licenses
-            if (currentLevel == LicenseLevel.NO_KEY) {
-                // For free version (no license), fall back to NEAREST_NEIGHBOUR
-                filter = Filter.NEAREST_NEIGHBOUR;
-                // Log the license restriction (optional)
-                java.util.logging.Logger.getLogger(ImagePairLoader.class.getName())
-                    .info("HQX filter disabled - Advanced license required. Using NEAREST_NEIGHBOUR instead.");
-            }
-        }
         
         // apply hqx if applicable
         double effectiveScaling = scaling;
