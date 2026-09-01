@@ -15,9 +15,12 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 与IE碰撞的动作，适用于接触到显式窗口（聊天窗/记事本等）的动作
+ * </p>
  */
-public class FallWithIE extends Fall
-{
+public class FallWithIE extends Fall {
+
     private static final Logger log = Logger.getLogger( FallWithIE.class.getName( ) );
 
     public static final String PARAMETER_IEOFFSETX = "IeOffsetX";

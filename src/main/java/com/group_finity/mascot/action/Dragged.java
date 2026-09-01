@@ -14,9 +14,12 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 拖拽动作类，用于拖拽桌宠
+ * </p>
  */
-public class Dragged extends ActionBase
-{
+public class Dragged extends ActionBase {
+
     private static final String VARIABLE_FOOTX = "FootX";
 
     private static final String VARIABLE_FOOTDX = "FootDX";
@@ -71,7 +74,8 @@ public class Dragged extends ActionBase
         getEnvironment( ).refreshWorkArea( );
 
         final Location cursor = getEnvironment( ).getCursor( );
-        
+
+        // 计算偏移量
         int offsetX = (int)Math.round( getOffsetX( ) * scaling );
         int offsetY = (int)Math.round( getOffsetY( ) * scaling );
         if( getOffsetType( ).equals( getSchema( ).getString( "Origin" ) ) )
@@ -80,6 +84,7 @@ public class Dragged extends ActionBase
             offsetY = 0 - offsetY + getMascot( ).getImage( ).size( ).height / 2;
         }
 
+        // 如果鼠标移动超过5像素，则重置时间帧为0，否则保持原时间不变
         if( Math.abs( ( cursor.getX( ) - offsetX ) - getMascot( ).getAnchor( ).x ) >= 5 )
         {
             this.setTime( 0 );

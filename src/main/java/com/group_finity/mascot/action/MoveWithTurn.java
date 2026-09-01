@@ -9,10 +9,13 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 可转换方向的移动（已废弃，暂时没有使用场景）
+ * </p>
  */
 @Deprecated
-public class MoveWithTurn extends Move
-{
+public class MoveWithTurn extends Move {
+
     public MoveWithTurn( java.util.ResourceBundle schema, final List<Animation> animations, final VariableMap params )
     {
         super( schema, animations, params );

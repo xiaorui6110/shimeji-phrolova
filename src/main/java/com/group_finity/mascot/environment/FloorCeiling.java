@@ -5,8 +5,10 @@ import java.awt.Point;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 地板、天花板，包含地板、天花板位置、地板、天花板移动
+ * </p>
  */
-
 public class FloorCeiling implements Border {
 
 	private final Area area;
@@ -56,6 +58,7 @@ public class FloorCeiling implements Border {
 
 	@Override
 	public boolean isOn(final Point location) {
+		//  严格相等
 		return getArea().isVisible() && (getY() == location.y) && (getLeft() <= location.x)
 				&& (location.x <= getRight());
 	}

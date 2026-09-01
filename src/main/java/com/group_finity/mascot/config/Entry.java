@@ -15,9 +15,12 @@ import org.w3c.dom.NodeList;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 配置文件 XML 解析后的节点封装，提供节点名称、属性、子节点等访问。
+ * </p>
  */
-public class Entry
-{
+public class Entry {
+
     private final Element element;
 
     private Map<String, String> attributes;

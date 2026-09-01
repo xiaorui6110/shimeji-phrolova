@@ -13,9 +13,12 @@ import java.util.Map;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 环境接口，包含获取屏幕、光标位置、获取工作区域、获取活动窗口、移动活动窗口、还原活动窗口、刷新缓存、释放资源
+ * </p>
  */
-public abstract class Environment
-{
+public abstract class Environment {
+
     protected abstract Area getWorkArea( );
 
     public abstract Area getActiveIE( );

@@ -5,13 +5,12 @@ import java.io.Serial;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 配置异常
+ * </p>
  */
-
 public class ConfigurationException extends Exception {
 
-	/**
-	 * 
-	 */
 	@Serial
     private static final long serialVersionUID = 1L;
 

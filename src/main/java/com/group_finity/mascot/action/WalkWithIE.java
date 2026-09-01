@@ -15,9 +15,12 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 与IE一起移动动作
+ * </p>
  */
-public class WalkWithIE extends Move
-{
+public class WalkWithIE extends Move {
+
     private static final Logger log = Logger.getLogger( WalkWithIE.class.getName( ) );
 
     public static final String PARAMETER_IEOFFSETX = "IeOffsetX";

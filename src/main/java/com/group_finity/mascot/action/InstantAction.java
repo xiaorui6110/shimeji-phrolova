@@ -10,6 +10,9 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ *  立即执行的动作，不受时间影响，在初始化时立即执行（点击桌宠，选择某一动作，立即执行）
+ * </p>
  */
 public abstract class InstantAction extends ActionBase {
 

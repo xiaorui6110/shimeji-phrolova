@@ -17,9 +17,13 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * by Kilkakon
  * kilkakon.com
+ * <p>
+ * 扫描交互动作
+ * </p>
  */
-public class ScanInteract extends BorderedAction
-{
+@Deprecated
+public class ScanInteract extends BorderedAction {
+
     private static final Logger log = Logger.getLogger( ScanInteract.class.getName( ) );
     
     public static final String PARAMETER_BEHAVIOUR = "Behaviour";

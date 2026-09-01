@@ -13,9 +13,12 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 投掷IE动作
+ * </p>
  */
-public class ThrowIE extends Animate
-{
+public class ThrowIE extends Animate {
+
     public static final String PARAMETER_INITIALVX = "InitialVX";
 
     private static final int DEFAULT_INITIALVX = 32;

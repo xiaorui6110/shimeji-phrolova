@@ -5,8 +5,10 @@ import java.awt.Rectangle;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 区域，包含区域边界、区域位置、区域大小等信息
+ * </p>
  */
-
 public class Area {
 
 	private boolean visible = true;

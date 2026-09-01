@@ -17,9 +17,13 @@ import com.group_finity.mascot.script.VariableMap;
 
 /**
  * @author Kilkakon
+ * <p>
+ * 移动至指定位置
+ * TODO: 可能后续会使用
+ * </p>
  */
-public class ComplexMove extends BorderedAction
-{
+public class ComplexMove extends BorderedAction {
+
     private static final Logger log = Logger.getLogger( ComplexMove.class.getName( ) );
     
     private final Breed.Delegate delegate = new Breed.Delegate( this );

@@ -14,6 +14,9 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ *  注册桌宠
+ * </p>
  */
 public class Regist extends ActionBase {
 

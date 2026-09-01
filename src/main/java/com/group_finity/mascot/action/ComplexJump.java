@@ -17,9 +17,13 @@ import com.group_finity.mascot.script.VariableMap;
 
 /**
  * @author Kilkakon
+ * <p>
+ * 跳跃至指定位置
+ * TODO: 可能后续会使用
+ * </p>
  */
-public class ComplexJump extends ActionBase
-{
+public class ComplexJump extends ActionBase {
+
     private static final Logger log = Logger.getLogger( ComplexJump.class.getName( ) );
     
     private final Breed.Delegate delegate = new Breed.Delegate( this );

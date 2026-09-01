@@ -10,6 +10,9 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 动画动作，继承实现部分方法
+ * </p>
  */
 public class Animate extends BorderedAction {
 

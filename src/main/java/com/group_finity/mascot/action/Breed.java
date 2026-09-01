@@ -17,11 +17,14 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 克隆动作，在动作的最后一帧生成新的Mascot，本质是子实例
+ * </p>
  */
-public class Breed extends Animate
-{
+public class Breed extends Animate {
+
     private static final Logger log = Logger.getLogger( Breed.class.getName( ) );
-    
+
     // thanks to LavenderSnek for the idea for this delegate, cleans up the breeding code nicely
     static class Delegate
     {
@@ -81,6 +84,7 @@ public class Breed extends Animate
 
                 log.log( Level.INFO, "Breed Mascot ({0},{1},{2})", new Object[] { action.getMascot( ), action, mascot } );
 
+                // 克隆动作的坐标计算，目前是根据当前动作的方向来计算
                 if( action.getMascot( ).isLookRight( ) )
                 {
                     mascot.setAnchor( new Point( action.getMascot( ).getAnchor( ).x - ( (int)Math.round( getBornX( ) * scaling ) ),

@@ -11,6 +11,9 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 复杂动作类，用于组合多个动作，并按顺序执行。
+ * </p>
  */
 public abstract class ComplexAction extends ActionBase {
 
@@ -62,16 +65,15 @@ public abstract class ComplexAction extends ActionBase {
 		}
 	}
         
-        @Override
-        public Boolean isDraggable( ) throws VariableException
-        {
-            boolean draggable = true;
-            if( currentAction < actions.length && actions[ currentAction ] != null && actions[ currentAction ] instanceof ActionBase )
-            {
-                return ( (ActionBase)actions[ currentAction ] ).isDraggable( );
-            }
-            return draggable;
-        }
+	@Override
+	public Boolean isDraggable( ) throws VariableException {
+		boolean draggable = true;
+		if( currentAction < actions.length && actions[ currentAction ] != null && actions[ currentAction ] instanceof ActionBase )
+		{
+			return ( (ActionBase)actions[ currentAction ] ).isDraggable( );
+		}
+		return draggable;
+	}
 
 	protected void setCurrentAction(final int currentAction) throws VariableException {
 		this.currentAction = currentAction;

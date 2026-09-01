@@ -10,9 +10,12 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 转向动作
+ * </p>
  */
-public class Turn extends BorderedAction
-{
+@Deprecated
+public class Turn extends BorderedAction {
     public static final String PARAMETER_LOOKRIGHT = "LookRight";
 
     private boolean turning = false;

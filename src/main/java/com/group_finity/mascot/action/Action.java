@@ -7,23 +7,16 @@ import com.group_finity.mascot.exception.VariableException;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 桌宠动作接口，包含初始化、是否有下一步、下一步
+ * </p>
  */
 public interface Action {
 
-	/**
-	 * @param mascot
-	 */
 	void init(Mascot mascot) throws VariableException;
 
-	/**
-	 * @return
-	 */
 	boolean hasNext() throws VariableException;
 
-	/**
-	 *
-	 * @throws LostGroundException
-	 */
 	void next() throws LostGroundException, VariableException;
 
 }

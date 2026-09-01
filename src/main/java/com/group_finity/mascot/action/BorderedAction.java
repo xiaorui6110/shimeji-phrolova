@@ -12,6 +12,9 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 有边界的动作，包含边界类型、边界（天花板、墙壁、地板），属于上层的抽象基类
+ * </p>
  */
 public abstract class BorderedAction extends ActionBase {
 
@@ -38,6 +41,7 @@ public abstract class BorderedAction extends ActionBase {
 
 		final String borderType = getBorderType();
 
+		// 根据边界类型设置边界
 		if( getSchema( ).getString( BORDERTYPE_CEILING ).equals( borderType ) ) {
 			this.setBorder(getEnvironment().getCeiling());
 		} else if( getSchema( ).getString( BORDERTYPE_WALL ).equals( borderType ) ) {

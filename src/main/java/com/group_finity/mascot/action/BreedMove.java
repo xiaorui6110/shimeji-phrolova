@@ -9,9 +9,13 @@ import java.util.List;
 
 /**
  * @author Kilkakon
+ * <p>
+ * 继承的移动动作，但放在克隆的动作中，不好实现，遂废弃（主要是没有较好的表现形式）
+ * </p>
  */
-public class BreedMove extends Move
-{    
+@Deprecated
+public class BreedMove extends Move {
+
     private final Breed.Delegate delegate = new Breed.Delegate( this );
     
     public BreedMove( java.util.ResourceBundle schema, final List<Animation> animations, final VariableMap context )

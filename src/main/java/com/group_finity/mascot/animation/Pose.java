@@ -8,11 +8,13 @@ import com.group_finity.mascot.image.ImagePairs;
 
 /**
  * Original Author: Yuki Yamada of Group Finity
- * (<a href="http://www.group-finity.com/Shimeji/">...</a>) Currently developed by Shimeji-ee
- * Group.
+ * (<a href="http://www.group-finity.com/Shimeji/">...</a>) Currently developed by Shimeji-ee Group.
+ * <p>
+ * 姿势，包含图片（左/右）、偏移量、持续时间、声音
+ * </p>
  */
-public class Pose
-{
+public class Pose {
+
     private final String image;
     private final String rightImage;
     private final int dx;

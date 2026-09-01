@@ -15,9 +15,12 @@ import java.util.logging.Level;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ *  与其他桌宠互动的动作，在当前动作的最后一帧，切换到指定行为（Hug等）
+ * </p>
  */
-public class Interact extends Animate
-{
+public class Interact extends Animate {
+
     private static final Logger log = Logger.getLogger( Interact.class.getName( ) );
     
     public static final String PARAMETER_BEHAVIOUR = "Behaviour";

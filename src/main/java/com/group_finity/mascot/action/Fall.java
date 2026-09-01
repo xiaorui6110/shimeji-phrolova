@@ -12,6 +12,9 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 下落动作，通用的下落动作（受重力与阻力影响）
+ * </p>
  */
 public class Fall extends ActionBase {
 
@@ -91,6 +94,7 @@ public class Fall extends ActionBase {
         int dx = (int) this.getVelocityX( ) + (int) this.getModX( );
         int dy = (int) this.getVelocityY( ) + (int) this.getModY( );
 
+        // 防止精度丢失
         this.setModX( this.getModX( ) % 1 );
         this.setModY( this.getModY( ) % 1 );
 
@@ -100,18 +104,20 @@ public class Fall extends ActionBase {
 
         OUTER: for( int i = 0; i <= dev; ++i )
         {
+            // 防穿透的步进插值，如果本帧速度很快（比如从高处坠落，一帧移动几十像素），直接跳到终点会穿透薄墙或地面（tunneling），逐像素走就能精准停在边界上
             int x = start.x + dx * i / dev;
             int y = start.y + dy * i / dev;
 
             getMascot( ).setAnchor( new Point( x, y ) );
             if( dy > 0 )
             {
-                // HACK IE
+                // HACK IE，修正 IE 窗口顶边的 1 像素误差
                 for( int j = -80; j<=0; ++j )
                 {
                     getMascot( ).setAnchor( new Point( x, y + j ) );
                     if( getEnvironment( ).getFloor( true ).isOn( getMascot( ).getAnchor( ) ) )
                     {
+                        // 探测到真实地板，则停止下落
                         break OUTER;
                     }
                 }

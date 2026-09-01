@@ -13,8 +13,10 @@ import com.group_finity.mascot.exception.ConfigurationException;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 动作引用，包含引用名称、参数
+ * </p>
  */
-
 public class ActionRef implements IActionBuilder {
 
 	private static final Logger log = Logger.getLogger(ActionRef.class.getName());

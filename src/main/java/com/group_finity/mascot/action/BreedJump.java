@@ -10,9 +10,13 @@ import com.group_finity.mascot.script.VariableMap;
 
 /**
  * @author Kilkakon
+ * <p>
+ * 继承的跳跃动作，但放在克隆的动作中，不好实现，遂废弃（主要是没有较好的表现形式）
+ * </p>
  */
-public class BreedJump extends Jump
-{    
+@Deprecated
+public class BreedJump extends Jump {
+
     private final Breed.Delegate delegate = new Breed.Delegate( this );
     
     public BreedJump( java.util.ResourceBundle schema, final List<Animation> animations, final VariableMap context )

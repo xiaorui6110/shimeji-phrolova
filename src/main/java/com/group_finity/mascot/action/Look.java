@@ -6,9 +6,12 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 改变朝向的动作
+ * </p>
  */
-public class Look extends InstantAction
-{
+public class Look extends InstantAction {
+
     public static final String PARAMETER_LOOKRIGHT = "LookRight";
 
     public Look( java.util.ResourceBundle schema, final VariableMap params )

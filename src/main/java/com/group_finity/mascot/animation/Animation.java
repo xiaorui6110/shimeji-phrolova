@@ -9,10 +9,12 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 动画，包含触发条件、姿势集合、热点集合、是否转向
+ * </p>
  */
+public class Animation {
 
-public class Animation
-{
     private final Variable condition;
     private final Pose[ ] poses;
     private final Hotspot[ ] hotspots;

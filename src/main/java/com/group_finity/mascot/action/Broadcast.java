@@ -8,21 +8,17 @@ import com.group_finity.mascot.exception.VariableException;
 import com.group_finity.mascot.script.VariableMap;
 
 /**
- * 广播动作类，用于向其他桌宠广播affordance信息
- * 
- * 这是一个类似于Animate的动作，但会在执行时设置桌宠的affordance属性，
- * 让其他桌宠能够通过ScanMove找到并与之交互。
- * 
  * Original Author: Yuki Yamada of Group Finity
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 广播动作类，用于向其他桌宠广播affordance信息
+ * 这是一个类似于Animate的动作，但会在执行时设置桌宠的affordance属性，让其他桌宠能够通过ScanMove找到并与之交互。
+ * </p>
  */
 public class Broadcast extends Animate {
     
     private boolean affordanceSet = false;
-    
-    /**
-     * 构造函数
-     */
+
     public Broadcast(java.util.ResourceBundle schema, final List<Animation> animations, final VariableMap context) {
         super(schema, animations, context);
     }

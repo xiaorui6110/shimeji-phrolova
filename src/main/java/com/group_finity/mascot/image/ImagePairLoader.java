@@ -18,9 +18,8 @@ import java.awt.Color;
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
  */
+public class ImagePairLoader {
 
-public class ImagePairLoader
-{
     public enum Filter { NEAREST_NEIGHBOUR, HQX, BICUBIC }
 
     /**

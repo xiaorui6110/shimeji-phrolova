@@ -5,13 +5,12 @@ import java.io.Serial;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 失活异常
+ * </p>
  */
-
 public class CantBeAliveException extends Exception {
 
-	/**
-	 * 
-	 */
 	@Serial
     private static final long serialVersionUID = 1L;
 

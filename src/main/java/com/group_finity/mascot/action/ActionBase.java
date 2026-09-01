@@ -15,9 +15,12 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 动作基类的相关实现，包含初始化、是否有下一步、下一步方法，重要参数有持续帧、触发条件、是否可拖拽、是否可用等
+ * </p>
  */
-public abstract class ActionBase implements Action
-{
+public abstract class ActionBase implements Action {
+
     public static final String PARAMETER_DURATION = "Duration";
 
     private static final boolean DEFAULT_CONDITION = true;

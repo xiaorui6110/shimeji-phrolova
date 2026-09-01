@@ -10,8 +10,10 @@ import java.util.Map;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 复合区域，包含多个区域
+ * </p>
  */
-
 public class ComplexArea {
 
 	private final Map<String, Area> areas = new HashMap<>();

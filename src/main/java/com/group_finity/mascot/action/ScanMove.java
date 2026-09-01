@@ -18,9 +18,12 @@ import com.group_finity.mascot.script.VariableMap;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 扫描移动动作
+ * </p>
  */
-public class ScanMove extends BorderedAction
-{
+public class ScanMove extends BorderedAction {
+
     private static final Logger log = Logger.getLogger( ScanMove.class.getName( ) );
     
     public static final String PARAMETER_BEHAVIOUR = "Behaviour";

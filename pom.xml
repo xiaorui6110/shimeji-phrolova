@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.group_finity</groupId>
-    <artifactId>shimeji-live</artifactId>
+    <artifactId>shimeji-Phrolova</artifactId>
     <version>2.0.0</version>
     <packaging>jar</packaging>
 
-    <name>Shimeji-Live</name>
-    <description>A desktop mascot that freely wanders and plays around the screen - Live Edition</description>
-    <url>https://github.com/BegoniaHe/dc-ShimejiLive</url>
+    <name>Shimeji-Phrolova</name>
+    <description>A desktop mascot that freely wanders and plays around the screen - Phrolova Edition</description>
+    <url>https://github.com/xiaorui6110/fll-shimeji</url>
     <inceptionYear>2009</inceptionYear>
     
     <licenses>

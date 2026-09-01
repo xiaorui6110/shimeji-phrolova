@@ -8,9 +8,12 @@ import com.group_finity.mascot.exception.CantBeAliveException;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 行为接口，包含初始化、下一步、鼠标按下、鼠标释放
+ * </p>
  */
-public interface Behavior
-{
+public interface Behavior {
+
     void init(Mascot mascot) throws CantBeAliveException;
 
     void next() throws CantBeAliveException;

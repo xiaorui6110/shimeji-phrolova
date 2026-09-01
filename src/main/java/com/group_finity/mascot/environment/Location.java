@@ -5,8 +5,10 @@ import java.awt.Point;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 位置
+ * </p>
  */
-
 public class Location {
 
 	private int x;

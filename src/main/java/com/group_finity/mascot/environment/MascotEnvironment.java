@@ -9,10 +9,12 @@ import com.group_finity.mascot.NativeFactory;
 /**
  * Original Author: Yuki Yamada of Group Finity (<a href="http://www.group-finity.com/Shimeji/">...</a>)
  * Currently developed by Shimeji-ee Group.
+ * <p>
+ * 桌宠当前活跃的环境和所处的区域等
+ * </p>
  */
+public class MascotEnvironment {
 
-public class MascotEnvironment
-{
     private final Environment impl;
 
     private final Mascot mascot;
