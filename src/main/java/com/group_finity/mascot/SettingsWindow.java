@@ -293,6 +293,11 @@ public class SettingsWindow extends javax.swing.JDialog {
                 btnDone.setText(language.getString("Done"));
                 btnCancel.setText(language.getString("Cancel"));
 
+                // 分组标题本地化（美化方案 C-1）
+                pnlStartupGroupBorder.setTitle(language.getString("GeneralStartupOptions"));
+                pnlDisplayGroupBorder.setTitle(language.getString("GeneralDisplayOptions"));
+                pnlFilterGroupBorder.setTitle(language.getString("GeneralFilterOptions"));
+
                 // come back around to this one now that the dropdown is populated
                 for (int index = 0; index < backgroundModes.length; index++) {
                         if (backgroundMode.equals(backgroundModes[index])) {
@@ -856,64 +861,71 @@ public class SettingsWindow extends javax.swing.JDialog {
                 chkAlwaysShowInformationScreen
                                 .addItemListener(evt -> chkAlwaysShowInformationScreenItemStateChanged(evt));
 
-                javax.swing.GroupLayout pnlGeneralLayout = new javax.swing.GroupLayout(pnlGeneral);
-                pnlGeneral.setLayout(pnlGeneralLayout);
-                pnlGeneralLayout.setHorizontalGroup(
-                                pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(pnlGeneralLayout.createSequentialGroup()
+                // ===== General 页分组：启动选项 / 显示与缩放 / 图像滤镜（美化方案 C-1）=====
+                JPanel pnlStartupGroup = new JPanel();
+                pnlStartupGroup.setBorder(pnlStartupGroupBorder);
+
+                JPanel pnlDisplayGroup = new JPanel();
+                pnlDisplayGroup.setBorder(pnlDisplayGroupBorder);
+
+                JPanel pnlFilterGroup = new JPanel();
+                pnlFilterGroup.setBorder(pnlFilterGroupBorder);
+
+                javax.swing.GroupLayout pnlStartupGroupLayout = new javax.swing.GroupLayout(pnlStartupGroup);
+                pnlStartupGroup.setLayout(pnlStartupGroupLayout);
+                pnlStartupGroupLayout.setHorizontalGroup(
+                                pnlStartupGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(pnlStartupGroupLayout.createSequentialGroup()
                                                                 .addContainerGap()
-                                                                .addGroup(pnlGeneralLayout
-                                                                                .createParallelGroup(
-                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addGroup(pnlStartupGroupLayout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.LEADING)
                                                                                 .addComponent(chkAlwaysShowShimejiChooser)
-                                                                                .addGroup(pnlGeneralLayout
-                                                                                                .createSequentialGroup()
-                                                                                                .addComponent(lblFilter)
-                                                                                                .addGap(8, 8, 8)
-                                                                                                .addComponent(btnFilterHelp,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                .addComponent(lblScaling)
-                                                                                .addGroup(pnlGeneralLayout
-                                                                                                .createSequentialGroup()
-                                                                                                .addGap(10, 10, 10)
-                                                                                                .addGroup(pnlGeneralLayout
-                                                                                                                .createParallelGroup(
-                                                                                                                                javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                                                                .addComponent(sldOpacity,
-                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                                .addGroup(pnlGeneralLayout
-                                                                                                                                .createParallelGroup(
-                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                                                                .addComponent(radFilterNearest)
-                                                                                                                                .addGroup(pnlGeneralLayout
-                                                                                                                                                .createSequentialGroup()
-                                                                                                                                                .addComponent(sldScaling,
-                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                                                                .addGap(10, 10, 10)
-                                                                                                                                                .addComponent(spnScaling,
-                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                                                                .addComponent(radFilterBicubic)
-                                                                                                                                .addComponent(radFilterHqx))))
-                                                                                .addComponent(lblOpacity)
                                                                                 .addComponent(chkAlwaysShowInformationScreen))
-                                                                .addContainerGap(80, Short.MAX_VALUE)));
-                pnlGeneralLayout.setVerticalGroup(
-                                pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(pnlGeneralLayout.createSequentialGroup()
+                                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)));
+                pnlStartupGroupLayout.setVerticalGroup(
+                                pnlStartupGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(pnlStartupGroupLayout.createSequentialGroup()
                                                                 .addContainerGap()
                                                                 .addComponent(chkAlwaysShowShimejiChooser)
                                                                 .addPreferredGap(
-                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(chkAlwaysShowInformationScreen)
-                                                                .addGap(18, 18, 18)
+                                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)));
+
+                javax.swing.GroupLayout pnlDisplayGroupLayout = new javax.swing.GroupLayout(pnlDisplayGroup);
+                pnlDisplayGroup.setLayout(pnlDisplayGroupLayout);
+                pnlDisplayGroupLayout.setHorizontalGroup(
+                                pnlDisplayGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(pnlDisplayGroupLayout.createSequentialGroup()
+                                                                .addContainerGap()
+                                                                .addGroup(pnlDisplayGroupLayout
+                                                                                .createParallelGroup(
+                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                .addComponent(lblOpacity)
+                                                                                .addComponent(sldOpacity,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(lblScaling)
+                                                                                .addGroup(pnlDisplayGroupLayout
+                                                                                                .createSequentialGroup()
+                                                                                                .addComponent(sldScaling,
+                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                .addGap(10, 10, 10)
+                                                                                                .addComponent(spnScaling,
+                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)));
+                pnlDisplayGroupLayout.setVerticalGroup(
+                                pnlDisplayGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(pnlDisplayGroupLayout.createSequentialGroup()
+                                                                .addContainerGap()
                                                                 .addComponent(lblOpacity)
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -926,7 +938,7 @@ public class SettingsWindow extends javax.swing.JDialog {
                                                                 .addComponent(lblScaling)
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addGroup(pnlGeneralLayout.createParallelGroup(
+                                                                .addGroup(pnlDisplayGroupLayout.createParallelGroup(
                                                                                 javax.swing.GroupLayout.Alignment.BASELINE)
                                                                                 .addComponent(sldScaling,
                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -936,9 +948,35 @@ public class SettingsWindow extends javax.swing.JDialog {
                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                .addPreferredGap(
-                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                .addGroup(pnlGeneralLayout.createParallelGroup(
+                                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)));
+
+                javax.swing.GroupLayout pnlFilterGroupLayout = new javax.swing.GroupLayout(pnlFilterGroup);
+                pnlFilterGroup.setLayout(pnlFilterGroupLayout);
+                pnlFilterGroupLayout.setHorizontalGroup(
+                                pnlFilterGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(pnlFilterGroupLayout.createSequentialGroup()
+                                                                .addContainerGap()
+                                                                .addGroup(pnlFilterGroupLayout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                .addGroup(pnlFilterGroupLayout
+                                                                                                .createSequentialGroup()
+                                                                                                .addComponent(lblFilter)
+                                                                                                .addGap(8, 8, 8)
+                                                                                                .addComponent(btnFilterHelp,
+                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                .addComponent(radFilterNearest)
+                                                                                .addComponent(radFilterBicubic)
+                                                                                .addComponent(radFilterHqx))
+                                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)));
+                pnlFilterGroupLayout.setVerticalGroup(
+                                pnlFilterGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(pnlFilterGroupLayout.createSequentialGroup()
+                                                                .addContainerGap()
+                                                                .addGroup(pnlFilterGroupLayout.createParallelGroup(
                                                                                 javax.swing.GroupLayout.Alignment.BASELINE)
                                                                                 .addComponent(lblFilter)
                                                                                 .addComponent(btnFilterHelp,
@@ -954,7 +992,40 @@ public class SettingsWindow extends javax.swing.JDialog {
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(radFilterHqx)
-                                                                .addContainerGap(75, Short.MAX_VALUE)));
+                                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)));
+
+                javax.swing.GroupLayout pnlGeneralLayout = new javax.swing.GroupLayout(pnlGeneral);
+                pnlGeneral.setLayout(pnlGeneralLayout);
+                pnlGeneralLayout.setHorizontalGroup(
+                                pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(pnlStartupGroup, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(pnlDisplayGroup, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(pnlFilterGroup, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+                pnlGeneralLayout.setVerticalGroup(
+                                pnlGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(pnlGeneralLayout.createSequentialGroup()
+                                                                .addContainerGap()
+                                                                .addComponent(pnlStartupGroup,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(pnlDisplayGroup,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(pnlFilterGroup,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addContainerGap(25, Short.MAX_VALUE)));
 
                 pnlTabs.addTab("General", pnlGeneral);
 
@@ -2647,6 +2718,12 @@ public class SettingsWindow extends javax.swing.JDialog {
         private javax.swing.JCheckBox chkWindowModeEnabled;
         private javax.swing.JComboBox<String> cmbBackgroundImageMode;
         private javax.swing.ButtonGroup grpFilter;
+        private final javax.swing.border.TitledBorder pnlStartupGroupBorder = javax.swing.BorderFactory
+                        .createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Startup Options");
+        private final javax.swing.border.TitledBorder pnlDisplayGroupBorder = javax.swing.BorderFactory
+                        .createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Display & Scaling");
+        private final javax.swing.border.TitledBorder pnlFilterGroupBorder = javax.swing.BorderFactory
+                        .createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Image Filter");
         private javax.swing.JLabel lblBackground;
         private javax.swing.JLabel lblBackgroundImage;
         private javax.swing.JLabel lblBlackColour;

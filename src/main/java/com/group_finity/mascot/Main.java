@@ -21,13 +21,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBoxMenuItem;
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.w3c.dom.Document;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import com.group_finity.mascot.config.Configuration;
 import com.group_finity.mascot.config.Entry;
@@ -90,6 +97,10 @@ public class Main {
     
     // Action that matches the "Gather Around Mouse!" context menu command
     static final String BEHAVIOR_GATHER = "ChaseMouse";
+
+    // Mascot.xsd schema cache (loaded once per path)
+    private static volatile Schema xmlSchemaCache;
+    private static volatile File xmlSchemaCacheFile;
 
     static {
         try {
@@ -196,8 +207,8 @@ public class Main {
                 break;
             case "light":
             default:
-                // 默认使用IntelliJ风格浅色主题
-                FlatLightFlatIJTheme.setup();
+                // 默认使用青色浅色主题（美化方案 A）
+                FlatCyanLightIJTheme.setup();
                 break;
         }
 
@@ -212,6 +223,15 @@ public class Main {
             UIManager.put("defaultFont", UIManager.getFont("Label.font").deriveFont(
                     UIManager.getFont("Label.font").getSize() * menuScaling));
         }
+
+        // 现代圆角与控件样式（美化方案 A）
+        UIManager.put("Button.arc", 10);
+        UIManager.put("Component.arc", 10);
+        UIManager.put("TextComponent.arc", 8);
+        UIManager.put("Component.focusWidth", 2);
+        UIManager.put("ScrollBar.thumbArc", 999);
+        UIManager.put("ScrollBar.thumbInsets", new java.awt.Insets(2, 2, 2, 2));
+        UIManager.put("Button.defaultFollowsFocus", false);
 
         // 启用窗口装饰
         JFrame.setDefaultLookAndFeelDecorated(true);
@@ -243,15 +263,15 @@ public class Main {
 
                 // 将主题属性应用到FlatLaf
                 if (themeProps.containsKey("PrimaryColour1")) {
-                    UIManager.put("@accentColor", Color.decode(themeProps.getProperty("PrimaryColour1", "#1EA6EB")));
+                    UIManager.put("@accentColor", Color.decode(themeProps.getProperty("PrimaryColour1", "#1677FF")));
                 }
                 if (themeProps.containsKey("PrimaryColour2")) {
                     UIManager.put("Button.background",
-                            Color.decode(themeProps.getProperty("PrimaryColour2", "#28B0F5")));
+                            Color.decode(themeProps.getProperty("PrimaryColour2", "#1E88E5")));
                 }
                 if (themeProps.containsKey("PrimaryColour3")) {
                     UIManager.put("Button.hoverBackground",
-                            Color.decode(themeProps.getProperty("PrimaryColour3", "#32BAFF")));
+                            Color.decode(themeProps.getProperty("PrimaryColour3", "#2E98F5")));
                 }
 
             } catch (Exception e) {
@@ -268,9 +288,10 @@ public class Main {
      * 应用默认主题颜色
      */
     private static void applyDefaultThemeColors() {
-        UIManager.put("@accentColor", Color.decode("#1EA6EB"));
-        UIManager.put("Button.background", Color.decode("#28B0F5"));
-        UIManager.put("Button.hoverBackground", Color.decode("#32BAFF"));
+        // 现代蓝色系强调（美化方案 A）
+        UIManager.put("@accentColor", Color.decode("#1677FF"));
+        UIManager.put("Button.background", Color.decode("#1E88E5"));
+        UIManager.put("Button.hoverBackground", Color.decode("#2E98F5"));
     }
 
     /**
@@ -541,6 +562,8 @@ public class Main {
 
             Configuration configuration = new Configuration();
 
+            validateXmlAgainstSchema(actions, actionsFile, baseDir, imageSet);
+
             configuration.load(new Entry(actions.getDocumentElement()), imageSet);
 
             filePath = baseDir + "/conf/";
@@ -591,6 +614,8 @@ public class Main {
 
             final Document behaviors = DocumentBuilderFactory.newInstance().newDocumentBuilder()
                     .parse(new FileInputStream(behaviorsFile));
+
+            validateXmlAgainstSchema(behaviors, behaviorsFile, baseDir, imageSet);
 
             configuration.load(new Entry(behaviors.getDocumentElement()), imageSet);
 
@@ -662,6 +687,62 @@ public class Main {
         }
 
         return false;
+    }
+
+    /**
+     * Validates the parsed actions/behaviors XML against Mascot.xsd.
+     * <p>
+     * Validation is advisory only: schema violations are logged as WARNING and never
+     * block loading, so third-party image sets that go beyond our schema still run.
+     * The schema file is looked up next to the XML first, then in conf/Mascot.xsd.
+     * If no schema is found the check is skipped silently.
+     */
+    private static void validateXmlAgainstSchema(final Document document, final String xmlFile,
+            final String baseDir, final String imageSet) {
+        File schemaFile = new File(new File(xmlFile).getParentFile(), "Mascot.xsd");
+        if (!schemaFile.exists()) {
+            schemaFile = new File(baseDir, "conf/Mascot.xsd");
+        }
+        if (!schemaFile.exists()) {
+            return; // no schema available, nothing to validate against
+        }
+        try {
+            Schema schema = xmlSchemaCache;
+            if (schema == null || !schemaFile.equals(xmlSchemaCacheFile)) {
+                final SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+                schema = factory.newSchema(schemaFile);
+                xmlSchemaCache = schema;
+                xmlSchemaCacheFile = schemaFile;
+            }
+            final Validator validator = schema.newValidator();
+            final ArrayList<String> issues = new ArrayList<>();
+            validator.setErrorHandler(new ErrorHandler() {
+                @Override
+                public void warning(final SAXParseException e) {
+                    issues.add(e.getLineNumber() + ": " + e.getMessage());
+                }
+
+                @Override
+                public void error(final SAXParseException e) {
+                    issues.add(e.getLineNumber() + ": " + e.getMessage());
+                }
+
+                @Override
+                public void fatalError(final SAXParseException e) {
+                    issues.add(e.getLineNumber() + ": " + e.getMessage());
+                }
+            });
+            validator.validate(new DOMSource(document));
+            if (!issues.isEmpty()) {
+                final String prefix = imageSet + " XML schema issues in " + xmlFile + ": ";
+                for (final String issue : issues) {
+                    log.log(Level.WARNING, prefix + issue);
+                }
+            }
+        } catch (final Exception e) {
+            // Never let schema validation break image set loading
+            log.log(Level.WARNING, "XML schema validation failed for " + xmlFile + ": " + e.getMessage());
+        }
     }
 
     /**
@@ -1017,11 +1098,20 @@ public class Main {
                                 updateConfigFile();
                             });
 
+                            // Japanese menu item
+                            final JMenuItem japaneseMenu = new JMenuItem("\u65e5\u672c\u8a9e");
+                            japaneseMenu.addActionListener(e4 -> {
+                                form.dispose();
+                                updateLanguage("ja");
+                                updateConfigFile();
+                            });
+
 
                             JPopupMenu languagePopup = new JPopupMenu();
                             languagePopup.add(englishMenu);
                             languagePopup.addSeparator();
                             languagePopup.add(chineseMenu);
+                            languagePopup.add(japaneseMenu);
                             languagePopup.addPopupMenuListener(new PopupMenuListener() {
                                 @Override
                                 public void popupMenuWillBecomeVisible(PopupMenuEvent e) {

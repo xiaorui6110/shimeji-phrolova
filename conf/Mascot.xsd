@@ -17,7 +17,7 @@
     </complexType>
     
     <complexType name="ActionArguments" abstract="true">
-  		<attribute name="Condition" type="tns:Parameter" />
+  		<attribute name="Condition" type="string" />
   		<attribute name="Duration" type="tns:Parameter" />
    		<attribute name="TargetX" type="tns:Parameter" />
   		<attribute name="TargetY" type="tns:Parameter" />
@@ -31,7 +31,7 @@
   		<attribute name="Gap" type="tns:Parameter" />
   		<attribute name="BornX" type="tns:Parameter" />
   		<attribute name="BornY" type="tns:Parameter" />
-  		<attribute name="BornBehavior" type="tns:Parameter" />
+  		<attribute name="BornBehavior" type="string" />
    		<attribute name="VelocityParam" type="tns:Parameter" />
    		<attribute name="RegistanceX" type="tns:Parameter" />
   		<attribute name="RegistanceY" type="tns:Parameter" />
@@ -59,6 +59,8 @@
 		    				<enumeration value="Fixed"></enumeration>
 		    				<enumeration value="Sequence"></enumeration>
 		    				<enumeration value="Select"></enumeration>
+		    				<enumeration value="Stay"></enumeration>
+		    				<enumeration value="Animate"></enumeration>
 		    			</restriction>
 		    		</simpleType>
 		   		</attribute>
@@ -82,6 +84,9 @@
 		    	<attribute name="Behavior" type="string" />
 		    	<attribute name="TargetBehavior" type="string" />
 		    	<attribute name="Loop" type="tns:Parameter" />
+		    	<attribute name="Draggable" type="boolean" />
+		    	<attribute name="TransformMascot" type="string" />
+		    	<attribute name="TransformBehavior" type="string" />
 	    	</extension>
 	    </complexContent>
     </complexType>
@@ -108,14 +113,15 @@
     </complexType>
     
     <complexType name="Pose">
-   		<attribute name="Image" use="required">
+   		<!-- Image/ImageAnchor 可省略：无图占位帧（如 Interact 被抱/被抛时的空动作）合法 -->
+   		<attribute name="Image">
    			<simpleType>
    				<restriction base="string">
    					<pattern value=".+\.(png|gif|jpeg|jpg|bmp|PNG|GIF|JPEG|JPG|BMP)" />
    				</restriction>
    			</simpleType>
    		</attribute>
-   		<attribute name="ImageAnchor" use="required">
+   		<attribute name="ImageAnchor">
    			<simpleType>
    				<restriction base="string">
    					<pattern value="-?\d+,-?\d+" />
@@ -151,13 +157,15 @@
 
     <complexType name="Behavior">
 	    <sequence>
-	    	<choice maxOccurs="1" minOccurs="0" >
+	    	<!-- 兼容两种拼写：NextBehaviorList（现行）/ NextBehavior（旧版遗留文件） -->
+	    	<choice maxOccurs="unbounded" minOccurs="0" >
 		    	<element name="NextBehaviorList" type="tns:NextBehaviorList" />
+		    	<element name="NextBehavior" type="tns:NextBehaviorList" />
 	    	</choice>
 	    </sequence>
   		<attribute name="Name" type="string" use="required" />
   		<attribute name="Frequency" type="int" use="required" />
-  		<attribute name="Condition" type="tns:Parameter" />
+  		<attribute name="Condition" type="string" />
   		<attribute name="Hidden" type="boolean" />
     </complexType>
     
@@ -182,13 +190,14 @@
     <complexType name="BehaviorReference">
   		<attribute name="Name" type="string" use="required" />
   		<attribute name="Frequency" type="int" use="required" />
-  		<attribute name="Condition" type="tns:Parameter" />
+  		<attribute name="Condition" type="string" />
+  		<attribute name="Hidden" type="boolean" />
     </complexType>
     
     <complexType name="BehaviorCondition">
     	<complexContent>
     		<extension base="tns:BehaviorList">
-    			<attribute name="Condition" type="tns:Parameter" />
+    			<attribute name="Condition" type="string" />
     		</extension>
     	</complexContent>
     </complexType>

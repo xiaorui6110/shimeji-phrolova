@@ -33,6 +33,21 @@ class WindowsEnvironment extends Environment {
     private static String[] windowTitles = null;
     private static String[] windowTitlesBlacklist = null;
 
+    /**
+     * 内置可互动（IE）窗口类名白名单。
+     * 标题匹配无法覆盖中文标题/动态标题（如"下载 - 文件资源管理器"），
+     * 故按窗口类名识别常见可互动窗口。可按需扩充。
+     */
+    private static final String[] DEFAULT_IE_CLASS_NAMES = {
+            "CabinetWClass", // 文件资源管理器 / File Explorer
+            "Chrome_WidgetWin_1", // Chrome / Edge（Chromium）
+            "Chrome_WidgetWin_0", // 旧版 Chrome
+            "IEFrame", // Internet Explorer / 系统 Web 宿主
+            "Notepad", // 记事本
+            "MozillaWindowClass", // Firefox
+            "ApplicationFrameWindow" // UWP 应用宿主窗口
+    };
+
     private enum IEResult {
         INVALID, NOT_IE, IE_OUT_OF_BOUNDS, IE
     }
@@ -48,6 +63,12 @@ class WindowsEnvironment extends Environment {
 
         final String ieTitle = new String(title, 0, titleLength);
 
+        // 窗口类名：用于识别标题为中文/动态的常见可互动窗口
+        final char[] classNameBuf = new char[256];
+        final int classNameLength = User32.INSTANCE.GetClassNameW(ie, classNameBuf, 256);
+        final String className = new String(classNameBuf, 0, classNameLength);
+        final String classNameLower = className.toLowerCase(java.util.Locale.ROOT);
+
         // optimisation to remove empty windows from consideration without the loop.
         // Program Manager hard coded exception as there's issues if we mess with it
         if (ieTitle.isEmpty() || ieTitle.equals("Program Manager")) {
@@ -55,31 +76,39 @@ class WindowsEnvironment extends Environment {
             return false;
         }
 
-        // blacklist takes precedence over whitelist
+        // blacklist takes precedence over whitelist；条目同时匹配标题与类名
         boolean blacklistInUse = false;
         if (windowTitlesBlacklist == null) {
             windowTitlesBlacklist = Main.getInstance().getProperties().getProperty("InteractiveWindowsBlacklist", "").split("/");
         }
-        for (String windowTitle : windowTitlesBlacklist) {
-            if (!windowTitle.trim().isEmpty()) {
+        for (String entry : windowTitlesBlacklist) {
+            if (!entry.trim().isEmpty()) {
                 blacklistInUse = true;
-                if (ieTitle.contains(windowTitle)) {
+                if (matchesWindow(ieTitle, classNameLower, entry)) {
                     ieCache.put(ie, false);
                     return false;
                 }
             }
         }
 
-        // whitelist
+        // 内置窗口类名白名单优先（不依赖标题语言，可识别资源管理器/浏览器等）
+        for (String ieClass : DEFAULT_IE_CLASS_NAMES) {
+            if (className.equals(ieClass)) {
+                ieCache.put(ie, true);
+                return true;
+            }
+        }
+
+        // whitelist：InteractiveWindows 配置条目同时匹配标题与类名，作为补充白名单
         boolean whitelistInUse = false;
         if (windowTitles == null) {
             windowTitles = Main.getInstance().getProperties().getProperty("InteractiveWindows", "").split("/");
         }
 
-        for (String windowTitle : windowTitles) {
-            if (!windowTitle.trim().isEmpty()) {
+        for (String entry : windowTitles) {
+            if (!entry.trim().isEmpty()) {
                 whitelistInUse = true;
-                if (ieTitle.contains(windowTitle)) {
+                if (matchesWindow(ieTitle, classNameLower, entry)) {
                     // log.log( Level.INFO, String.format( "value %s is ie", new String( title, 0,
                     // titleLength ) ) );
                     ieCache.put(ie, true);
@@ -97,6 +126,16 @@ class WindowsEnvironment extends Environment {
             ieCache.put(ie, true);
             return true;
         }
+    }
+
+    /**
+     * 判断窗口是否命中配置条目：标题包含（区分大小写，兼容旧配置）或 类名包含（不区分大小写）。
+     */
+    private static boolean matchesWindow(final String title, final String classNameLower, final String entry) {
+        if (title.contains(entry)) {
+            return true;
+        }
+        return classNameLower.contains(entry.toLowerCase(java.util.Locale.ROOT));
     }
 
     private static IEResult isViableIE(Pointer ie) {
