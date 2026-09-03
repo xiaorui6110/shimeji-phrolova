@@ -1,173 +1,127 @@
 # 配置系统
 
-Shimeji-Live 的配置系统允许您自定义角色的行为、外观和其他设置。
+运行时配置位于程序目录的 `conf/` 下，均采用可编辑的文本格式，修改后重启生效。
 
-## 配置文件结构
+## 配置文件一览
 
-### 主要配置文件
+| 文件 | 作用 |
+|---|---|
+| `settings.properties` | 用户主配置（语言、缩放、透明度、启用的角色等） |
+| `actions.xml` | 动作定义：动作类型与逐帧姿态（Pose） |
+| `behaviors.xml` | 行为定义：行为引用、频率、条件与分组 |
+| `Mascot.xsd` | 上述 XML 的 Schema；启动加载时校验，仅记录告警不阻断 |
+| `language*.properties` | 界面多语言（`zh` / `en` / `ja` + `language.properties` 回退） |
+| `schema*.properties` | XML 标签名的语言映射（日文/英文两套方言标签的间接引用层） |
+| `logging.properties` | Java 日志级别与输出 |
+| `theme.properties` | 设置窗体的 FlatLaf 主题外观 |
 
-- `conf/actions.xml` - 动作定义
-- `conf/behaviors.xml` - 行为模式
-- `conf/settings.properties` - 基本设置
-- `conf/language.properties` - 语言配置
+### 查找优先级
 
-### 图像资源
+同一文件存在多份时按以下顺序覆盖（后面的优先）：
 
-- `img/` - 角色图像文件夹
-- 支持 PNG 格式的透明图像
-
-## 基本设置
-
-### settings.properties
-
-```properties
-# 动画间隔（毫秒）
-AnimationDuration=40
-
-# 同时显示的角色数量
-MaxMascots=5
-
-# 是否启用音效
-SoundEffects=true
-
-# DPI 设置
-MenuDPI=96
+```
+conf/                  ← 全局默认
+img/<图像集名>/conf/    ← 该图像集专属配置（可覆盖全局）
 ```
 
-### 常用设置
+每个图像集目录可自带 `actions.xml`、`behaviors.xml` 等，实现“一图集一玩法”。
 
-- `AnimationDuration` - 控制动画流畅度
-- `MaxMascots` - 限制性能消耗
-- `SoundEffects` - 启用/禁用音效
-- `MenuDPI` - 界面缩放设置
+## settings.properties 键
 
-## 行为配置
+| 键 | 示例 | 说明 |
+|---|---|---|
+| `ActiveShimeji` | `imageSetA/imageSetB` | 默认启用的图像集，`/` 分隔多个 |
+| `Language` | `zh-CN` | 界面语言（zh-CN / en-GB 等） |
+| `Environment` | `generic` | 平台后端：`generic`(自动) / `virtual`(窗口内) / `wayland` |
+| `Scaling` | `1.2` | 角色缩放系数 |
+| `Opacity` | `1.0` | 角色整体透明度（0~1） |
+| `Filter` | `bicubic` | 图像滤镜：`nearest` / `hqx` / `bicubic` |
+| `Breeding` | `true` | 允许繁殖（分裂出新角色） |
+| `AlwaysShowShimejiChooser` | `false` | 启动即显示角色选择器 |
+| `AlwaysShowInformationScreen` | `false` | 启动即显示信息窗体 |
+| `InteractiveWindows` | `Chat/Notepad/...` | 可交互窗口名单（角色可攀上这些窗口） |
+| `InteractiveWindowsBlacklist` | — | 上述名单的排除项 |
+| `WindowSize` | `600x500` | 设置窗体尺寸 |
+| `MenuDPI` | `192` | 托盘菜单 DPI |
+| `Background` / `BackgroundMode` / `BackgroundImage` | — | 信息/设置窗体背景 |
 
-### behaviors.xml 结构
+## actions.xml
+
+定义**动作**（短时行为原语），结构示意：
 
 ```xml
-<BehaviorList>
-    <Behavior Name="Normal" Frequency="10">
-        <NextBehaviorList>
-            <BehaviorReference Behavior="Walk" Frequency="5"/>
-            <BehaviorReference Behavior="Sit" Frequency="3"/>
-        </NextBehaviorList>
-    </Behavior>
-</BehaviorList>
+<Actions>
+  <Action Name="..." Type="Move">
+    <Pose Image="..." ImageAnchor="bottomCenter" Velocity="2,-2" Duration="20"/>
+    <Pose Image="..." ImageAnchor="bottomCenter" Velocity="2,-1" Duration="20"/>
+  </Action>
+</Actions>
 ```
 
-### 行为属性
+- **`Action` 属性**：`Name`（唯一）、`Type`（动作类型）、`Duration`/`Condition`/`Draggable`（默认 true）/`Affordance`（交互标签）
+- **Pose（帧）属性**：
+  | 属性 | 说明 |
+  |---|---|
+  | `Image` / `ImageRight` | 左右朝向帧图（缺省右图时自动水平翻转） |
+  | `ImageAnchor` | 图中“脚”的位置（锚点），用于贴地与定位 |
+  | `Velocity` | 每帧位移 `dx,dy` |
+  | `Duration` | 该帧持续的节拍数 |
+  | `Sound` | 播放的音效 |
+- **动作类型（内建）**：`Stay`、`Move`、`Animate`、`Jump`、`Breed`（分裂）、`ThrowIE`（抛出窗体）、`Interact`（与窗口交互）、`Sequence`（串行动作）、`Select`、`Broadcast`、`Regist`、`Dragged`（被抓取）
+- **`Type="Embedded"`**：用 `Class` 属性直接引用 Java 动作类，供扩展动作类型
+- 动作级还有 `BornMascot`（出生子角色）、`TransformMascot` / `TransformBehavior`（变身）
 
-- `Name` - 行为名称
-- `Frequency` - 执行频率
-- `Hidden` - 是否在菜单中隐藏
+## behaviors.xml
 
-## 动作配置
-
-### actions.xml 基础
+定义**行为**（长期状态机）与切换规则：
 
 ```xml
-<ActionList>
-    <Action Name="Stand" Type="Stay">
-        <Animation>
-            <Pose Image="stand.png" ImageAnchor="Bottom" Duration="1000"/>
-        </Animation>
-    </Action>
-</ActionList>
+<Behaviors>
+  <Behavior Name="SitDown" Hidden="true">
+    <NextBehaviorList>
+      <BehaviorReference Name="Idle" Frequency="1"/>
+    </NextBehaviorList>
+  </Behavior>
+</Behaviors>
 ```
 
-### 图像锚点
+- `BehaviorReference`：候选行为，`Name` + `Frequency`（权重）；`Frequency=0` 仅可被显式引用，不参与普通随机
+- `Hidden`：不出现在右键菜单（基础行为通常隐藏）
+- `<Condition>` 分组：内含多个 `BehaviorReference`，按条件动态生效
+- `<NextBehaviorList>`：本行为结束时的候选集合；前一个动作若声明了它，会**追加**到全局候选（`Add="true"`）或**仅用**这些候选（`Add="false"`）
 
-- `Bottom` - 底部对齐（常用于地面站立）
-- `Center` - 居中对齐
-- `Top` - 顶部对齐
+::: tip 必须存在的基础行为
+`Fall`（坠落）、`Dragged`（被抓）、`Thrown`（被抛出）由代码硬编码引用，任何图像集都必须声明。
+:::
 
-## 语言配置
+## 变量与表达式
 
-### 多语言支持
+XML 属性值支持 Rhino 表达式（见[架构总览 → 表达式系统](/development/architecture#表达式系统)），常用上下文：
 
-创建对应的语言文件：
+| 对象 | 可用成员（节选） |
+|---|---|
+| `mascot` | `anchor`、`imageSet`、`lookRight`、`count`、`totalCount`、`getBounds()` |
+| `mascot.environment` | `screen`、`workArea`、`activeIE`、`cursor`、`floor`、`ceiling`、`leftWall`、`rightWall`、`isScreenTopBottom(...)` |
+| `action` | 当前动作的注入变量 |
+| `<Constant>` | 图像集常量（优先级低于 `mascot` 成员） |
 
-- `language_en.properties` - 英文
-- `language_zh.properties` - 中文
-- `language.properties` - 默认语言
+## XML Schema 校验
 
-### 配置示例
+`conf/Mascot.xsd` 描述 `actions.xml` / `behaviors.xml` 的合法结构（动作类型、姿态属性、行为引用关系、数值格式等）。程序启动加载 XML 时会对照该 Schema 做一次**仅告警**校验：
 
-```properties
-CallShimeji=召唤Shimeji
-DismissAll=关闭程序
-Settings=设置
-```
+- 合法：静默通过
+- 不合规：在日志中记录 WARNING（含行号与原因），**不影响加载与运行**
 
-## 高级配置
+这样既可提示配置书写错误，又不会让一次笔误导致整个图像集无法使用。
 
-### 条件表达式
+## 多语言
 
-使用 JavaScript 语法的条件表达式：
+- 界面文案存放于 `language_<locale>.properties`；缺失条目回退到 `language.properties`
+- XML 标签名通过 `schema*.properties` 间接引用，同一份 `actions.xml`/`behaviors.xml` 可同时兼容英文与日文两种标签拼写
 
-```xml
-Condition="#{mascot.anchor.x} &lt; #{screen.width/2}"
-```
+## 新增一个图像集
 
-### 环境变量
-
-- `#{screen.width}` - 屏幕宽度
-- `#{screen.height}` - 屏幕高度
-- `#{mascot.anchor.x}` - 角色 X 坐标
-- `#{mascot.anchor.y}` - 角色 Y 坐标
-
-## 调试配置
-
-### 启用调试模式
-
-在 `settings.properties` 中添加：
-
-```properties
-DebugMode=true
-LogLevel=DEBUG
-```
-
-### 日志配置
-
-修改 `logging.properties`：
-
-```properties
-# 设置日志级别
-.level=INFO
-
-# 文件输出
-java.util.logging.FileHandler.pattern=shimeji.log
-java.util.logging.FileHandler.formatter=com.group_finity.mascot.LogFormatter
-```
-
-## 配置验证
-
-### XML 验证
-
-所有 XML 文件都有对应的 XSD 架构文件进行验证：
-
-- `conf/Mascot.xsd` - 主架构文件
-
-### 常见错误
-
-1. XML 格式错误
-2. 图像文件路径错误
-3. 条件表达式语法错误
-4. 属性值超出范围
-
-## 备份与恢复
-
-### 配置备份
-
-定期备份配置文件：
-
-```bash
-cp -r conf/ conf_backup/
-```
-
-### 恢复默认配置
-
-删除修改的配置文件，重启应用会自动恢复默认配置。
-
-更多配置选项请参考源代码中的示例和文档。
+1. 在 `img/` 下新建目录（目录名即图像集名），放入动画帧 PNG
+2. 在该目录下建 `conf/actions.xml`、`conf/behaviors.xml`（可复制其它图像集作为起点再修改）
+3. 可选：`conf/info.xml` 描述角色信息；`conf/settings.properties` 覆盖全局设置
+4. 重启程序，在“角色选择”中启用
